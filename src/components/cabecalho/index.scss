@@ -6,6 +6,7 @@
     width: 100%;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
     background-color: #3D3D3D;
+    height: 120px;
     
     .esquerda {
         display: flex;
@@ -21,6 +22,8 @@
             font: 500 40px Style Script;
             color: #fff;
             line-height: 2.5;
+            display: flex;
+            justify-content: center;
             text-decoration: none;
         }
     }
