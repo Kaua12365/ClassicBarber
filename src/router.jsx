@@ -6,7 +6,6 @@ import Rodape from './components/rodape';
 import NaoEncontrado from './pages/naoEncontrado';
 import Servicos from './pages/servicos';
 
-
 export default function Navegacao() {
     return (
         <BrowserRouter>
