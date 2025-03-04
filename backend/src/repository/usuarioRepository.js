@@ -31,3 +31,17 @@ export async function UsuarioDelete(user) {
 
     return infos.affectedRows;
 }
+
+export async function Login(user) {
+    const comando = `
+    select id, email, senha
+    from tb_usuarios
+    where email = ? and
+    senha = ?;
+    `;
+
+    let resp = await con.query(comando, [user.email, user.senha]);
+    let infos = resp[0][0];
+
+    return infos;
+}
