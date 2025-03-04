@@ -54,11 +54,13 @@
             font: 500 17px poppins;
             cursor: pointer;
             z-index: 1;
-            
-            &:hover {
+            transition: .3s;
+
+            &:hover {   
                 background-color: #fff;
                 color: #2980B9;
                 border-color: #2980B9;
+                transform: scale(1.02);
             }
         }
     }
