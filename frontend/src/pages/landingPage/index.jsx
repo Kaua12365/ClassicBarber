@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export default function LandingPage() {
   const navigate = useNavigate();
 
+
   function registerNavigate() {
     navigate("/cadastro");
   }
@@ -16,7 +17,7 @@ export default function LandingPage() {
     <div className="main-div">
       <title>Classic Barber</title>
       <div className="sections">
-        <Cabecalho />
+      <Cabecalho/>
         <section className="section-1">
           <div>
             {" "}
@@ -36,9 +37,9 @@ export default function LandingPage() {
             </button>
           </div>
         </section>
-        <section className="section-2">
+        <section id="QuemSomos" className="section-2">
           <div className="texts">
-            <h1 className="title">Quem Somos?</h1>
+            <h1 className="title" >Quem Somos?</h1>
             <h2 className="text">
               Na <span> Classic Barber</span>, conectamos você aos melhores
               barbeiros da sua região com rapidez e praticidade. Nossa
@@ -52,7 +53,22 @@ export default function LandingPage() {
           </div>
         </section>
         <section className="section-3">
-          <div className="contact">
+          <div id="Galeria"className="galeria">
+            <h1>Galeria</h1>
+
+            <div className="imagens">
+              <div className="imgs1">
+                <img src="/assets/images/primeira.png" alt="" />
+                <img src="/assets/images/segunda.png" alt="" />
+              </div>
+
+              <div className="imgs2">
+                <img src="/assets/images/terceira.png" alt="" />
+                <img src="/assets/images/quarta.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div id="Suporte" className="contact">
             {" "}
             <h1>Como você prefere falar conosco?</h1>{" "}
           </div>
@@ -67,21 +83,7 @@ export default function LandingPage() {
               <a>+55 (11) 97219-3396</a>
             </div>
           </div>
-          <div className="galeria">
-            <h1>GALERIA</h1>
-
-            <div className="imagens">
-              <div className="imgs1">
-                <img src="/assets/images/primeira.png" alt="" />
-                <img src="/assets/images/segunda.png" alt="" />
-              </div>
-
-              <div className="imgs2">
-                <img src="/assets/images/terceira.png" alt="" />
-                <img src="/assets/images/quarta.png" alt="" />
-              </div>
-            </div>
-          </div>
+          
         </section>
         <Rodape />
       </div>

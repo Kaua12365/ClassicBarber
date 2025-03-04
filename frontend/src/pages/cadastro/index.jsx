@@ -1,6 +1,7 @@
 import './index.scss';
 import Cabecalho from '../../components/cabecalho'
 import Tesoura from '../../components/tesoura';
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { useState } from 'react';
@@ -45,7 +46,18 @@ export default function Cadastro() {
     return (
         <div className="secao-cadastro">
             <title>Classic Barber</title>
-            <Cabecalho />
+                    <header className='cabecalho'>
+                            <div className="esquerda">
+                                <Link to="/">
+                                <img src="/assets/images/Mask group.png" alt="" />
+                                <a to="/">Classic Barber</a>
+                                </Link>
+                            </div>
+            
+                            <div className="direita">
+                                <Link to="/login">Login</Link>
+                            </div>
+                    </header>
             <div className="cadastrar">
                 <h1>Cadastro</h1>
 

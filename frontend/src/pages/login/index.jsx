@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './index.scss';
 import Tesoura from '../../components/tesoura';
 import Cabecalho from '../../components/cabecalho';
@@ -11,6 +11,7 @@ export default function Login() {
     const [senha, setSenha] = useState('');
 
     const Navigate = useNavigate();
+
 
     async function Login() {
         const url = 'http://localhost:3002/login';
@@ -46,8 +47,6 @@ export default function Login() {
                 </div>
 
                 <div className="direita">
-                    <Link>Quem Somos</Link>
-                    <Link>Suporte</Link>
                     <Link to='/cadastro'>Registrar-se</Link>
                 </div>
         </header>
