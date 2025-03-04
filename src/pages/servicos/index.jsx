@@ -7,6 +7,7 @@ export default function Servicos(){
 
     return(
         <div className="secao-servicos">
+            <title>Classic Barber</title>
             <Cabecalho />
 
             <div className="texto">

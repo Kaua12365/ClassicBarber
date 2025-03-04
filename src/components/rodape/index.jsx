@@ -24,7 +24,7 @@ export default function Rodape() {
                     <Link>Mapa do site</Link>
                 </div>
                 <div className="meio">
-                    <h1>Paginas</h1>
+                    <h1>Páginas</h1>
                     <Link to="/">Home</Link>
                     <Link to="/servicos">Serviços</Link>
                     <Link>Contatos</Link>

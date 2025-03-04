@@ -9,6 +9,7 @@ export default function Login() {
 
     return (
         <div className="Secao-Login">
+            <title>Classic Barber</title>
             <header className='cabecalho'>
                 <div className="esquerda">
                     <Link to="/">

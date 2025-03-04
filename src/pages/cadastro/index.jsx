@@ -5,6 +5,7 @@ import Tesoura from '../../components/tesoura';
 export default function Cadastro() {
     return (
         <div className="secao-cadastro">
+            <title>Classic Barber</title>
             <Cabecalho />
             <div className="cadastrar">
                 <h1>Cadastro</h1>

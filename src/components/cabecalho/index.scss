@@ -16,6 +16,9 @@
         img {
             max-width: 110px;
             height: 100px;
+            user-select: none;
+            pointer-events: none;
+            -webkit-user-drag: none;
         }
 
         a {
