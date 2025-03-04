@@ -6,7 +6,6 @@ import Cabecalho from '../../components/cabecalho';
 
 export default function Login() {
 
-
     return (
         <div className="Secao-Login">
             <title>Classic Barber</title>
