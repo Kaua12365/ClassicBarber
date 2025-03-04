@@ -1,6 +1,7 @@
 import './index.scss';
 import Cabecalho from '../../components/cabecalho'
 import Tesoura from '../../components/tesoura';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Cadastro() {
     return (

@@ -38,6 +38,7 @@
                     letter-spacing: 0;
                     text-align: center;
                     width: 10em;
+                    user-select: none;
                 }
 
                 span {
@@ -77,6 +78,7 @@
                 font-weight: bold;
                 font-size: 5em;
                 text-underline-offset: none;
+                user-select: none;
             }
 
             .text {
@@ -85,6 +87,7 @@
                 font-size: 2em;
                 color: #f1f2f6;
                 line-height: 2em;
+                user-select: none;
             }
 
             span {
