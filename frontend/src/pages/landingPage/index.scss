@@ -178,6 +178,7 @@
             flex-wrap: wrap;
             padding: 60px;
             gap: 20px;
+            width: 100%;
 
             h1 {
                 font: 500 45px poppins;
@@ -192,17 +193,22 @@
                 flex-wrap: wrap;
                 gap: 50px;
                 padding: 50px;
+                width: 100%;
 
-                .imgs1,
-                .imgs2 {
+                .imgs1, .imgs2 {
                     display: flex;
                     flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
                     gap: 30px;
-
-                    img {
-                        width: 800px;
-                    }
+                    width: 100%;
                 }
+                
+                .imgs1 img, .imgs2 img {
+                    max-width: 800px;
+                    width: 50%; 
+                }
+                
             }
         }
     }
