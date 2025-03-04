@@ -4,6 +4,7 @@ import Cadastro from './pages/cadastro';
 import LandingPage from './pages/landingPage';
 import Rodape from './components/rodape';
 import NaoEncontrado from './pages/naoEncontrado';
+import MenuLateral from "./components/menuLateral"
 import Servicos from './pages/servicos';
 
 export default function Navegacao() {
@@ -13,6 +14,7 @@ export default function Navegacao() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/cadastro' element={<Cadastro />} /> 
                 <Route path='/rodape' element={<Rodape />} /> 
+                <Route path='/menuLateral' element={<MenuLateral />} />
                 <Route path='*' element={<NaoEncontrado />} />
                 <Route path='/' element={<LandingPage />} />
                 <Route path='/servicos' element={<Servicos />} />

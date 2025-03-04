@@ -1,0 +1,70 @@
+.side-menu {
+    font-family: Poppins;
+    background-color: #2980b9;
+    width: 400px;
+    border-radius: 0 20px 20px 0;
+    height: 1004px;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    .profile-user {
+        color: #f1f2f6;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 20em;
+
+        h1 {
+            font-weight: bold;
+            font-size: 2em;
+        }
+        img {
+            width: 4em;
+        }
+    }
+    .pages {
+        height: 28em;
+        width: 20em;
+        align-items: center;
+        color: #f1f2f6;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        font-size: 1.2em;
+
+        div {
+            height: 4em;
+            width: 260px;
+            color: #f1f2f6;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: row;
+            gap: 2em;
+            align-items: center;
+            cursor: pointer;
+        }
+        div:hover {
+            background-color: #f1f2f6;
+            color: #2980b9;
+            transition: fill 0.5s ease-in-out;
+            svg {
+                fill: #f1f2f6;
+                margin-left: 1em;
+            }
+            svg {
+                fill: #2980b9;
+                transition: fill 0.5s ease-in-out;
+            }
+        }
+        svg {
+            fill: #f1f2f6;
+            margin-left: 1em;
+        }
+    }
+    .logo {
+        cursor: pointer;
+    }
+}
