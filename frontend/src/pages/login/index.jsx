@@ -37,7 +37,20 @@ export default function Login() {
 
     return (
         <div className="Secao-Login">
-            <Cabecalho />
+                   <header className='cabecalho'>
+                <div className="esquerda">
+                    <Link to="/">
+                    <img src="/assets/images/Mask group.png" alt="" />
+                    <a to='/'>Classic Barber</a>
+                    </Link>
+                </div>
+
+                <div className="direita">
+                    <Link>Quem Somos</Link>
+                    <Link>Suporte</Link>
+                    <Link to='/cadastro'>Registrar-se</Link>
+                </div>
+        </header>
 
             <div className="logar">
                 <h1>Login</h1>
