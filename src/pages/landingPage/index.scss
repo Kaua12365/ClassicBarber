@@ -61,7 +61,7 @@
         align-items: center;
         justify-content: space-evenly;
         flex-direction: row;
-        height: 960px;
+        height: 980px;
         width: 1920px;
 
         .texts {
@@ -93,14 +93,17 @@
             }
         }
     }
-    .section-3{
+
+    .section-3 {
         display: flex;
         flex-direction: column;
-        .contact{
+        width: 1920px;
+
+        .contact {
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #2980B9;
+            background-color: #2980b9;
             color: #f1f2f6;
             text-align: center;
             height: 22.5em;
@@ -108,8 +111,13 @@
                 font-size: 5em;
             }
 
+            h1 {
+                font-size: 5em;
+                user-select: none;
+            }
         }
-        .contacts{
+
+        .contacts {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -117,27 +125,37 @@
             color: #f1f2f6;
             justify-content: space-around;
             height: 15em;
-            border-right: 1px solid #f1f2f6;
 
-            .email{
+            .line {
+                height: 15em;
+                width: 3.2em;
+
+                img {
+                    user-select: none;
+                    pointer-events: none;
+                    -webkit-user-drag: none;
+                }
+            }
+
+            .email {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                border-right: #f1f2f6 1px solid;
                 width: 960px;
                 height: 15em;
                 gap: 0.5em;
             }
-            .phone{
+
+            .phone {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border-left: #f1f2f6 1px solid;
                 width: 960px;
                 height: 15em;
                 gap: 0.5em;
             }
-            img{
+
+            img {
                 width: 40px;
                 height: 40px;
                 user-select: none;
