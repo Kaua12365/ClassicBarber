@@ -1,6 +1,5 @@
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import Cabecalho from "../../components/cabecalho/index.jsx";
 import Rodape from "../../components/rodape/index.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";

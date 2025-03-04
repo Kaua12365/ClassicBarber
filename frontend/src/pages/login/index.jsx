@@ -1,7 +1,6 @@
 import { useNavigate, Link } from 'react-router-dom';
 import './index.scss';
 import Tesoura from '../../components/tesoura';
-import Cabecalho from '../../components/cabecalho';
 import { useState } from 'react';
 import axios from 'axios';
 import { toast, Toaster } from 'react-hot-toast';

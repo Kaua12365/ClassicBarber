@@ -1,5 +1,4 @@
 import './index.scss';
-import Cabecalho from '../../components/cabecalho'
 import Tesoura from '../../components/tesoura';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
