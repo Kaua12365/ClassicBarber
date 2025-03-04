@@ -67,6 +67,21 @@ export default function LandingPage() {
               <a>+55 (11) 97219-3396</a>
             </div>
           </div>
+          <div className="galeria">
+            <h1>GALERIA</h1>
+
+            <div className="imagens">
+              <div className="imgs1">
+                <img src="/assets/images/primeira.png" alt="" />
+                <img src="/assets/images/segunda.png" alt="" />
+              </div>
+
+              <div className="imgs2">
+                <img src="/assets/images/terceira.png" alt="" />
+                <img src="/assets/images/quarta.png" alt="" />
+              </div>
+            </div>
+          </div>
         </section>
         <Rodape />
       </div>
