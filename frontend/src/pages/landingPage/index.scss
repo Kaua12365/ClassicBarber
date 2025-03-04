@@ -110,7 +110,9 @@
             color: #f1f2f6;
             text-align: center;
             height: 22.5em;
-            h1{
+            border: 1px solid #fff;
+
+            h1 {
                 font-size: 5em;
             }
 
@@ -164,6 +166,43 @@
                 user-select: none;
                 pointer-events: none;
                 -webkit-user-drag: none;
+            }
+        }
+
+
+        .galeria {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 60px;
+            gap: 20px;
+
+            h1 {
+                font: 500 45px poppins;
+                color: #ffff;
+            }
+
+            .imagens {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 50px;
+                padding: 50px;
+
+                .imgs1,
+                .imgs2 {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 30px;
+
+                    img {
+                        width: 800px;
+                    }
+                }
             }
         }
     }
