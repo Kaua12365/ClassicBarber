@@ -57,6 +57,7 @@ export default function LandingPage() {
                     <div className="email">
                         <img src="/assets/images/envelope-regular.svg"/><a>classicbarbersuporte@outlook.com</a>
                     </div>
+                    <img className="line" src="/assets/images/line.png"/>
                     <div className="phone">
                         <img src="/assets/images/phone-solid.svg"/><a>+55 (11) 97219-3396</a>
                     </div>  
