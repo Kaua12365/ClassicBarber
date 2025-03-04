@@ -1,0 +1,111 @@
+.calendar-container {
+  max-width: 90%;
+  width: 100%;
+  height: 80vh;
+  margin: 0 auto;
+  padding: 60px;
+  text-align: center;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+
+  .custom-calendar {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+  }
+
+  .custom-calendar .react-calendar__navigation {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    background: transparent;
+  }
+
+  .custom-calendar .react-calendar__navigation button {
+    color: white;
+    background: transparent;
+    border: none;
+    font-size: 29px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+  }
+
+
+  .custom-calendar .react-calendar__month-view__weekdays {
+    font-size: 29px;
+    color: white;
+    font-family: 'Poppins';
+    background: transparent;
+    margin-bottom: 25px;
+    font-weight: normal;
+    letter-spacing: 0;
+    text-decoration: none;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: unset;
+    width: 100%;
+  }
+
+  .custom-calendar .react-calendar__tile {
+    background: transparent;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    font-size: 25px;
+    padding: 30px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .custom-calendar .react-calendar__tile--active {
+    background: #2980B9;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  .react-calendar__month-view__weekdays__weekday abbr {
+    text-decoration: none !important;
+    font-size: 29px;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 5px;
+  }
+
+  .react-calendar__tile:hover {
+    transition: .3s;
+    background-color: #2980B9 !important;
+    color: white !important;
+  }
+
+  .react-calendar__navigation__label:hover {
+    background-color: transparent !important;
+    color: white !important;
+  }
+
+  .react-calendar__navigation__arrow:hover {
+    background-color: transparent !important;
+    color: white !important; 
+}
+
+.custom-calendar .react-calendar__navigation button {
+  color: white !important; 
+  background: transparent !important;
+  border: none;
+  font-size: 29px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.custom-calendar .react-calendar__navigation button:hover {
+  background-color: transparent !important;
+  color: #2980B9 !important; 
+}
+
+.custom-calendar .react-calendar__navigation button:active {
+  background-color: transparent !important;
+  color: #2980B9 !important; 
+}
+
+
+}

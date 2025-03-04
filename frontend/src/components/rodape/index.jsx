@@ -28,7 +28,7 @@ export default function Rodape() {
                     <Link to="/">Home</Link>
                     <Link to="/servicos">Serviços</Link>
                     <Link>Contatos</Link>
-                    <Link>Sobre nós</Link>
+                    <Link to='/agendamento'>Agendamentos</Link>
                 </div>
 
                 <div className="direita">

@@ -1,0 +1,31 @@
+.cardHorario {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 60px;
+    padding: 50px;
+    .cardzin {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border: 3px solid #2980B9;
+        width: 450px;
+        height: 90px;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: .3s;
+
+        &:hover{
+            background-color: #2980B9;
+            border: 2px solid #fff;
+        }
+
+        h1 {
+            color: #fff;
+            font: 500 35px poppins;
+        }
+    }
+}

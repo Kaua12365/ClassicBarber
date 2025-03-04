@@ -5,6 +5,7 @@ import LandingPage from './pages/landingPage';
 import Rodape from './components/rodape';
 import NaoEncontrado from './pages/naoEncontrado';
 import Servicos from './pages/servicos';
+import Agendamento from './pages/agendamento';
 
 export default function Navegacao() {
     return (
@@ -16,6 +17,7 @@ export default function Navegacao() {
                 <Route path='*' element={<NaoEncontrado />} />
                 <Route path='/' element={<LandingPage />} />
                 <Route path='/servicos' element={<Servicos />} />
+                <Route path='/agendamento' element={<Agendamento />} />
             </Routes>
         </BrowserRouter>
     )
