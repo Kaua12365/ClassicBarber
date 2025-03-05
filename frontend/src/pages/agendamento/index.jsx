@@ -16,7 +16,11 @@ export default function Agendamento() {
         if (servico) setNomeServico(servico);
     }, []);
 
-    async function confirmarAgendamento() {
+    async function confirmarAgendamento() { 
+        if (!data) {
+            toast.error('Por favor, selecione uma data.');
+            return;
+        }
 
         let dataFormatada = data;
 
