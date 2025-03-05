@@ -56,31 +56,47 @@ export default function Perfil() {
   async function AlterarPerfil() {
     try {
       if (!id) {
-        toast.error("ID do usuário não encontrado.")
-        return
+        toast.error("ID do usuário não encontrado.");
+        return;
       }
-      const url = `http://localhost:3002/usuario/?id=${id}`
+  
+      if (senha !== confirmarSenha) {
+        toast.error("As senhas não coincidem.");
+        return;
+      }
+  
+      const url = `http://localhost:3002/usuario/?id=${id}`;
       const obj = {
         nome: nome,
         telefone: telefone,
         email: email,
         senha: senha,
-      }
-
-      if (senha !== confirmarSenha) {
-        toast.error("As senhas não coincidem.")
-        return
-      }
-
-      const resp = await axios.put(url, obj)
-
-      toast.success("Perfil atualizado com sucesso!")
+      };
+  
+      const resp = await axios.put(url, obj);
+  
+      // Atualizar Local Storage
+      const usuarioAtualizado = {
+        ...storage("USUARIO"), // Mantém outras informações que não foram alteradas
+        nome: nome,
+        telefone: telefone,
+        email: email,
+      };
+  
+      storage("USUARIO", usuarioAtualizado); // Salva os novos dados no local-storage
+  
+      // Atualizar o estado do React com os novos dados
+      setNome(usuarioAtualizado.nome);
+      setTelefone(usuarioAtualizado.telefone);
+      setEmail(usuarioAtualizado.email);
+  
+      toast.success("Perfil atualizado com sucesso!");
     } catch (error) {
-      console.error("Erro ao alterar perfil:", error)
+      console.error("Erro ao alterar perfil:", error);
       if (error.response) {
-        toast.error(`Erro: ${error.response.data.message || "Erro ao alterar perfil"}`)
+        toast.error(`Erro: ${error.response.data.message || "Erro ao alterar perfil"}`);
       } else {
-        toast.error("Erro ao alterar perfil.")
+        toast.error("Erro ao alterar perfil.");
       }
     }
   }
