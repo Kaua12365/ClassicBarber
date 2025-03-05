@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './pages/login';
-import Cadastro from './pages/cadastro';
-import LandingPage from './pages/landingPage';
-import Rodape from './components/rodape';
-import NaoEncontrado from './pages/naoEncontrado';
-import MenuLateral from "./components/menuLateral"
-import Servicos from './pages/servicos';
-import Agendamento from './pages/agendamento';
-import Perfil from "./pages/perfil"
-import Home from "./pages/home"
+import Login from '../pages/login';
+import Cadastro from '../pages/cadastro';
+import LandingPage from '../pages/landingPage';
+import Rodape from '../components/rodape';
+import NaoEncontrado from '../pages/naoEncontrado';
+import MenuLateral from "../components/menuLateral"
+import Servicos from '../pages/servicos';
+import Agendamento from '../pages/agendamento';
+import Perfil from "../pages/perfil"
+import Home from "../pages/home"
 import PrivateRoute from './PrivateRoute';
 
 export default function Navegacao() {
