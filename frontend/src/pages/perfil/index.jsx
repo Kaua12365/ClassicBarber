@@ -23,6 +23,7 @@ export default function Perfil() {
     setId(User.id)
     setNome(User.nome)
     setEmail(User.email)
+    setTelefone(User.telefone)
     
     async function buscarDadosUsuario() {
       try {
@@ -209,8 +210,8 @@ export default function Perfil() {
           <div className="formulario-perfil">
             <form onSubmit={handleSubmit}>
               <div className="campo-form">
-                <label htmlFor="nome">Nome</label>
-                <input type="text" id="nome" name="nome" value={nome} onChange={handleInputChange} required />
+                <label htmlFor="nome" >Nome</label>
+                <input style={{textTransform: "capitalize"}} type="text" id="nome" name="nome" value={nome} onChange={handleInputChange} required />
               </div>
 
               <div className="campo-form">
