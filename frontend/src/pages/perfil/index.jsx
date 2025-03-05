@@ -27,9 +27,7 @@ export default function Perfil() {
         nome: nome,
         telefone: telefone,
         email: email,
-        senha: senhaAntiga,
-        novaSenha: senha,
-        confirmarSenha: confirmarSenha,
+        senha: senha
       };
 
       if (senha !== confirmarSenha) {
