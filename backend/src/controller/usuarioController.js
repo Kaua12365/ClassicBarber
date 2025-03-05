@@ -1,4 +1,4 @@
-import { Login, UsuarioDelete, UsuarioGet, UsuarioPost } from "../repository/usuarioRepository.js";
+import { Login, UsuarioDelete, UsuarioGet, UsuarioPost} from "../repository/usuarioRepository.js";
 import { Router } from "express";
 import ValidarUsuario from '../validation/usuarioValidation.js';
 
@@ -78,6 +78,5 @@ endpoint.post("/Login", async (req, resp) => {
         });
     }
 });
-
 
 export default endpoint;
