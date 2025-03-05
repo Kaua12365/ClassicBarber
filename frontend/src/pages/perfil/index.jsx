@@ -1,19 +1,9 @@
-<<<<<<< HEAD
-"use client"
-
-import axios from "axios"
-import MenuLateral from "../../components/menuLateral"
-import storage from "local-storage"
-import "./index.scss"
-import { useState, useEffect } from "react"
-import { toast, Toaster } from "react-hot-toast"
-=======
 import axios from "axios";
+import storage from "local-storage"
 import MenuLateral from "../../components/menuLateral";
 import "./index.scss";
 import { useEffect, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
->>>>>>> ee776810d1116d665e8caad0f206ad44bbfdb1af
 
 export default function Perfil() {
   const [id, setId] = useState(0)
@@ -32,9 +22,7 @@ export default function Perfil() {
     const User = storage('USUARIO')
     setId(User.id)
     setNome(User.nome)
-    setTelefone(User.telefone)
-    console.log(User.telefone)
-    console.log(User.email)
+    setEmail(User.email)
     
     async function buscarDadosUsuario() {
       try {
@@ -42,7 +30,6 @@ export default function Perfil() {
           setIsLoading(false)
           return
         }
-
         const url = `http://localhost:3002/usuario/?id=${id}`
         const response = await axios.get(url)
 
@@ -64,7 +51,7 @@ export default function Perfil() {
     }
 
     buscarDadosUsuario()
-  }, [ ])
+  }, [])
 
   async function AlterarPerfil() {
     try {
@@ -72,7 +59,6 @@ export default function Perfil() {
         toast.error("ID do usuário não encontrado.")
         return
       }
-
       const url = `http://localhost:3002/usuario/?id=${id}`
       const obj = {
         nome: nome,
@@ -134,7 +120,7 @@ export default function Perfil() {
     setPreviewImage(null)
   }
 
-  async function buscarDadosUsuario(id) {
+  async function buscarDadosUsuario() {
     try {
       if (!id) return
 
