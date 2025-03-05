@@ -12,7 +12,9 @@ export default function Cabecalho() {
   const location = useLocation()
 
 
-
+  function clearLocalStorage() {
+    localStorage.clear();
+}
     
   useEffect(() => {
     const User = storage("USUARIO")
@@ -99,7 +101,7 @@ export default function Cabecalho() {
           </div>
         </Link>
       </div>
-      <Link to="/" className="logo">
+      <Link to="/" className="logo" onClick={clearLocalStorage}>
         <img src="/assets/images/grupo6.svg" alt="Logo" />
       </Link>
     </nav>

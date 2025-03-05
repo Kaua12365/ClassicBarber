@@ -4,6 +4,9 @@ import Navegacao from './router';
 import './index.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+export const isLoggedIn = () => {
+  return !!localStorage.getItem("userToken");
+};
 
 root.render(
   <React.StrictMode>
