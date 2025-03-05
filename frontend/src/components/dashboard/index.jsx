@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Grid, Card, CardContent } from '@mui/material';
 import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale } from 'chart.js';
+import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale, DoughnutController } from 'chart.js';
 import axios from 'axios';
 import './index.scss';
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale);
+ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale, DoughnutController);
 
 function Dashboard() {
   const [totalAgendamentos, setTotalAgendamentos] = useState(0);
@@ -23,12 +23,15 @@ function Dashboard() {
       });
   }, []);
 
+  const total = 100;
+  const livre = total - totalAgendamentos;
+
   const data = {
     labels: ['Agendamentos Realizados', 'Espaço Livre'],
     datasets: [
       {
         label: 'Agendamentos',
-        data: [totalAgendamentos, 100 - totalAgendamentos],
+        data: [totalAgendamentos, livre],
         backgroundColor: ['#4caf50', '#e0e0e0'],
         borderColor: ['#388e3c', '#9e9e9e'],
         borderWidth: 1,
@@ -42,6 +45,16 @@ function Dashboard() {
         position: 'top',
         labels: {
           fontColor: 'black',
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: function(tooltipItem) {
+            const label = tooltipItem.label || '';
+            const value = tooltipItem.raw;
+            const percentage = ((value / total) * 100).toFixed(2);
+            return `${label}: ${value} (${percentage}%)`;
+          },
         },
       },
     },
@@ -78,6 +91,16 @@ function Dashboard() {
           </Card>
         </Grid>
 
+        <Grid item xs={12} sm={6} md={6}>
+          <Card className="card">
+            <CardContent className="card-content">
+              <Typography className="card-title">Agendamentos</Typography>
+              <Typography className="card-value">{totalAgendamentos} Agendamentos</Typography>
+              <Typography className="card-value">{livre} Espaço Livre</Typography>
+              <Typography className="card-value">{((totalAgendamentos / total) * 100).toFixed(2)}% Agendado</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
       </Grid>
     </Box>
   );
