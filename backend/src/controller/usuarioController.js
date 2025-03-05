@@ -1,4 +1,4 @@
-import { Login, UsuarioDelete, UsuarioGet, UsuarioPost } from "../repository/usuarioRepository.js";
+import { Login, UsuarioDelete, UsuarioGet, UsuarioPost, UsuarioPUT } from "../repository/usuarioRepository.js";
 import { Router } from "express";
 import ValidarUsuario from '../validation/usuarioValidation.js';
 
@@ -84,5 +84,25 @@ endpoint.post("/Login", async (req, resp) => {
     }
 });
 
+endpoint.put("/usuario", async (req, resp) => {
+    try {
+        let obj = req.body;
+        let id = req.query.id;
+        let linha = await UsuarioPUT(obj, id);
+
+        if (linha > 0) {
+            resp.send()
+        } else {
+            resp.send({
+                erro: "Nenhuma linha encontrada."
+            })
+        }
+
+    } catch (err) {
+        return resp.status(400).send({
+            erro: err.message
+        });
+    }
+});
 
 export default endpoint;
