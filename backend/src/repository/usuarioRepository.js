@@ -34,7 +34,7 @@ export async function UsuarioDelete(user) {
 
 export async function Login(user) {
     const comando = `
-    select id, nome, email, senha
+    select id, nome, telefone, email, senha
     from tb_usuarios
     where email = ? and
     senha = ?;

@@ -1,90 +1,160 @@
-import axios from "axios";
-import MenuLateral from "../../components/menuLateral";
-import "./index.scss";
-import { useState } from "react";
-import { toast, Toaster } from "react-hot-toast";
+"use client"
+
+import axios from "axios"
+import MenuLateral from "../../components/menuLateral"
+import storage from "local-storage"
+import "./index.scss"
+import { useState, useEffect } from "react"
+import { toast, Toaster } from "react-hot-toast"
 
 export default function Perfil() {
-  const [id, setId] = useState(localStorage.getItem("id") || "");
-  const [nome, setNome] = useState("");
-  const [telefone, setTelefone] = useState("");
-  const [email, setEmail] = useState("");
-  const [senhaAntiga, setSenhaAntiga] = useState("");
-  const [senha, setSenha] = useState("");
-  const [confirmarSenha, setConfirmarSenha] = useState("");
-  const [profileImage, setProfileImage] = useState("/assets/images/davi.svg");
-  const [previewImage, setPreviewImage] = useState(null);
+  const [id, setId] = useState(0)
+  const [nome, setNome] = useState("")
+  const [telefone, setTelefone] = useState("")
+  const [email, setEmail] = useState("")
+  const [senhaAntiga, setSenhaAntiga] = useState("")
+  const [senha, setSenha] = useState("")
+  const [confirmarSenha, setConfirmarSenha] = useState("")
+  const [profileImage, setProfileImage] = useState("/assets/images/davi.svg")
+  const [previewImage, setPreviewImage] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+
+  useEffect(() => {
+    const User = storage('USUARIO')
+    setId(User.id)
+    setNome(User.nome)
+    setTelefone(User.telefone)
+    console.log(User.telefone)
+    console.log(User.email)
+    
+    async function buscarDadosUsuario() {
+      try {
+        if (!id) {
+          setIsLoading(false)
+          return
+        }
+
+        const url = `http://localhost:3002/usuario/?id=${id}`
+        const response = await axios.get(url)
+
+        if (response.data) {
+          setNome(User.nome || "")
+          setTelefone(User.telefone || "")
+          setEmail(User.email || "")
+
+          if (User.imagem) {
+            setProfileImage(User.imagem)
+          }
+        }
+      } catch (error) {
+        console.error("Erro ao buscar dados do usuário:", error)
+        toast.error("Não foi possível carregar seus dados. Tente novamente mais tarde.")
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    buscarDadosUsuario()
+  }, [ ])
 
   async function AlterarPerfil() {
     try {
       if (!id) {
-        toast.error("ID do usuário não encontrado.");
-        return;
+        toast.error("ID do usuário não encontrado.")
+        return
       }
 
-      const url = `http://localhost:3002/usuario/?id=${id}`;
+      const url = `http://localhost:3002/usuario/?id=${id}`
       const obj = {
         nome: nome,
         telefone: telefone,
         email: email,
-        senha: senha
-      };
-
-      if (senha !== confirmarSenha) {
-        toast.error("As senhas não coincidem.");
-        return;
+        senha: senha,
       }
 
-      const resp = await axios.put(url, obj);
-      
-      toast.success("Perfil atualizado com sucesso!");
-      
+      if (senha !== confirmarSenha) {
+        toast.error("As senhas não coincidem.")
+        return
+      }
+
+      const resp = await axios.put(url, obj)
+
+      toast.success("Perfil atualizado com sucesso!")
     } catch (error) {
-      console.error('Erro ao alterar perfil:', error);
+      console.error("Erro ao alterar perfil:", error)
       if (error.response) {
-        toast.error(`Erro: ${error.response.data.message || "Erro ao alterar perfil"}`);
+        toast.error(`Erro: ${error.response.data.message || "Erro ao alterar perfil"}`)
       } else {
-        toast.error("Erro ao alterar perfil.");
+        toast.error("Erro ao alterar perfil.")
       }
     }
   }
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "nome") setNome(value);
-    if (name === "telefone") setTelefone(value);
-    if (name === "email") setEmail(value);
-    if (name === "senha") setSenhaAntiga(value);
-    if (name === "novaSenha") setSenha(value);
-    if (name === "confirmarSenha") setConfirmarSenha(value);
-  };
+    const { name, value } = e.target
+    if (name === "nome") setNome(value)
+    if (name === "telefone") setTelefone(value)
+    if (name === "email") setEmail(value)
+    if (name === "senha") setSenhaAntiga(value)
+    if (name === "novaSenha") setSenha(value)
+    if (name === "confirmarSenha") setConfirmarSenha(value)
+  }
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      const imageUrl = URL.createObjectURL(file);
-      setPreviewImage(imageUrl);
+      const file = e.target.files[0]
+      const imageUrl = URL.createObjectURL(file)
+      setPreviewImage(imageUrl)
     }
-  };
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    AlterarPerfil();
+    e.preventDefault()
+    AlterarPerfil()
     if (previewImage) {
-      setProfileImage(previewImage);
-      setPreviewImage(null);
+      setProfileImage(previewImage)
+      setPreviewImage(null)
     }
-  };
+  }
 
   const handleCancel = () => {
-    setNome("");
-    setTelefone("");
-    setEmail("");
-    setSenhaAntiga("");
-    setSenha("");
-    setConfirmarSenha("");
-    setPreviewImage(null);
-  };
+    buscarDadosUsuario()
+    setSenhaAntiga("")
+    setSenha("")
+    setConfirmarSenha("")
+    setPreviewImage(null)
+  }
+
+  async function buscarDadosUsuario(id) {
+    try {
+      if (!id) return
+
+      const url = `http://localhost:3002/usuario/?id=${id}`
+      const response = await axios.get(url)
+
+      if (response.data) {
+        const User = storage('USUARIO')
+        setNome(User.nome || "")
+        setTelefone(User.telefone || "")
+        setEmail(User.email || "")
+      }
+    } catch (error) {
+      console.error("Erro ao buscar dados do usuário:", error)
+    }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="secao-perfil">
+        <MenuLateral />
+        <div className="conteudo-perfil">
+          <h1>Configurações de Perfil</h1>
+          <div className="carregando">Carregando dados...</div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="secao-perfil">
@@ -131,14 +201,7 @@ export default function Perfil() {
             <form onSubmit={handleSubmit}>
               <div className="campo-form">
                 <label htmlFor="nome">Nome</label>
-                <input
-                  type="text"
-                  id="nome"
-                  name="nome"
-                  value={nome}
-                  onChange={handleInputChange}
-                  required
-                />
+                <input type="text" id="nome" name="nome" value={nome} onChange={handleInputChange} required />
               </div>
 
               <div className="campo-form">
@@ -155,14 +218,7 @@ export default function Perfil() {
 
               <div className="campo-form">
                 <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={email}
-                  onChange={handleInputChange}
-                  required
-                />
+                <input type="email" id="email" name="email" value={email} onChange={handleInputChange} required />
               </div>
 
               <div className="secao-senha">
@@ -170,24 +226,12 @@ export default function Perfil() {
 
                 <div className="campo-form">
                   <label htmlFor="senha">Senha Atual</label>
-                  <input
-                    type="password"
-                    id="senha"
-                    name="senha"
-                    value={senhaAntiga}
-                    onChange={handleInputChange}
-                  />
+                  <input type="password" id="senha" name="senha" value={senhaAntiga} onChange={handleInputChange} />
                 </div>
 
                 <div className="campo-form">
                   <label htmlFor="novaSenha">Nova Senha</label>
-                  <input
-                    type="password"
-                    id="novaSenha"
-                    name="novaSenha"
-                    value={senha}
-                    onChange={handleInputChange}
-                  />
+                  <input type="password" id="novaSenha" name="novaSenha" value={senha} onChange={handleInputChange} />
                 </div>
 
                 <div className="campo-form">
@@ -216,5 +260,5 @@ export default function Perfil() {
       </div>
       <Toaster />
     </div>
-  );
+  )
 }

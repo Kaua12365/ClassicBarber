@@ -3,8 +3,11 @@ import { Link, useLocation } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 export default function Cabecalho() {
+  const [id, setId] = useState(localStorage.getItem("id") || "");
   const [menuSelecionado, setMenuSelecionado] = useState("home")
+  const [nome, setNome] = useState("");
   const location = useLocation()
+
 
   useEffect(() => {
     const path = location.pathname
@@ -33,7 +36,7 @@ export default function Cabecalho() {
     <nav className="side-menu">
       <div className="profile-user">
         <img src="/assets/images/davi.svg" alt="" />
-        <h1>Davi Brito</h1>
+        <h1>{nome}</h1>
       </div>
       <div className="pages">
         <Link to="/home">

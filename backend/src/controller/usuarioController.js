@@ -73,6 +73,7 @@ endpoint.post("/Login", async (req, resp) => {
             resp.send({
                 id: login.id,
                 email: credenciais.email,
+                telefone: login.telefone,
                 senha: credenciais.senha,
                 nome: login.nome
             });
