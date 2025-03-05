@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client"
 
 import axios from "axios"
@@ -6,6 +7,13 @@ import storage from "local-storage"
 import "./index.scss"
 import { useState, useEffect } from "react"
 import { toast, Toaster } from "react-hot-toast"
+=======
+import axios from "axios";
+import MenuLateral from "../../components/menuLateral";
+import "./index.scss";
+import { useEffect, useState } from "react";
+import { toast, Toaster } from "react-hot-toast";
+>>>>>>> ee776810d1116d665e8caad0f206ad44bbfdb1af
 
 export default function Perfil() {
   const [id, setId] = useState(0)
@@ -155,6 +163,7 @@ export default function Perfil() {
       </div>
     )
   }
+
 
   return (
     <div className="secao-perfil">
