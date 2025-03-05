@@ -12,6 +12,18 @@ export default function Cadastro() {
     const [telefone, setTelefone] = useState('');
     const [email, setEmail] = useState('');
 
+    function formatarTelefone(value) {
+        value = value.replace(/\D/g, '');
+        
+        if (value.length > 10) {
+            value = value.replace(/^(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+        } else {
+            value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+        }
+
+        return value;
+    }
+
     async function Cadastrar() {
         const url = 'http://localhost:3002/usuario';
 
@@ -61,8 +73,14 @@ export default function Cadastro() {
                 <h1>Cadastro</h1>
 
                 <div className="inputs">
-                    <input type="text" placeholder='Insira seu nome.' value={nome} onChange={e => setNome(e.target.value)} />
-                    <input type="text" placeholder='Insira sua telefone.' value={telefone} onChange={e => setTelefone(e.target.value)} />
+                    <input style={{textTransform: "capitalize"}} type="text" placeholder='Insira seu nome.' value={nome} onChange={e => setNome(e.target.value)} />
+                    <input 
+                        type="text" 
+                        placeholder='Insira seu telefone.' 
+                        value={telefone} 
+                        onChange={e => setTelefone(formatarTelefone(e.target.value))}
+                        maxLength="15"
+                    />
                     <input type="text" placeholder='Insira seu email.' value={email} onChange={e => setEmail(e.target.value)} />
                     <input type="text" placeholder='Insira sua senha.' value={senha} onChange={e => setSenha(e.target.value)} />
                 </div>

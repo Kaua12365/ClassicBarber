@@ -1,16 +1,40 @@
 import "./index.scss"
 import { Link, useLocation } from "react-router-dom"
+import storage from "local-storage";
 import { useState, useEffect } from "react"
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function Cabecalho() {
-  const [id, setId] = useState(localStorage.getItem("id") || "");
+  const [id, setId] = useState();
   const [menuSelecionado, setMenuSelecionado] = useState("home")
   const [nome, setNome] = useState("");
   const location = useLocation()
 
 
+
+    
   useEffect(() => {
+    const User = storage("USUARIO")
     const path = location.pathname
+    setId(User.id)
+    async function buscarDadosUsuario() {
+      try {
+        const url = `http://localhost:3002/usuario/?id=${id}`
+        const response = await axios.get(url)
+
+        if (response.data) {
+          setNome(User.nome || "")
+
+        }
+      } catch (error) {
+        console.error("Erro ao buscar dados do usuário:", error)
+        toast.error("Não foi possível carregar seus dados. Tente novamente mais tarde.")
+      }
+    }
+
+    buscarDadosUsuario()
+
 
     if (path.includes("/home")) {
       setMenuSelecionado("home")
@@ -36,7 +60,7 @@ export default function Cabecalho() {
     <nav className="side-menu">
       <div className="profile-user">
         <img src="/assets/images/davi.svg" alt="" />
-        <h1>{nome}</h1>
+        <h1 style={{textTransform: "capitalize"}} >{nome}</h1>
       </div>
       <div className="pages">
         <Link to="/home">

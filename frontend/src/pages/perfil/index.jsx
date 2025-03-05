@@ -17,6 +17,18 @@ export default function Perfil() {
   const [previewImage, setPreviewImage] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
+  function formatarTelefone(value) {
+    value = value.replace(/\D/g, '');
+    
+    if (value.length > 10) {
+        value = value.replace(/^(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+    } else {
+        value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+    }
+
+    return value;
+}
+
 
   useEffect(() => {
     const User = storage('USUARIO')
@@ -223,7 +235,10 @@ export default function Perfil() {
                   id="telefone"
                   name="telefone"
                   value={telefone}
-                  onChange={handleInputChange}
+                  onChange={e => {
+                    handleInputChange(e);
+                    setTelefone(formatarTelefone(e.target.value));
+                  }}
                   required
                 />
               </div>
