@@ -8,6 +8,7 @@ import MenuLateral from "./components/menuLateral"
 import Servicos from './pages/servicos';
 import Agendamento from './pages/agendamento';
 import Perfil from "./pages/perfil"
+import Home from "./pages/home"
 
 export default function Navegacao() {
     return (
@@ -22,6 +23,7 @@ export default function Navegacao() {
                 <Route path='/' element={<LandingPage />} />
                 <Route path='/servicos' element={<Servicos />} />
                 <Route path='/agendamento' element={<Agendamento />} />
+                <Route path='/home' element={<Home />} />
             </Routes>
         </BrowserRouter>
     )

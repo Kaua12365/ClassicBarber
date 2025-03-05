@@ -1,0 +1,343 @@
+.secao-home {
+    display: flex;
+    min-height: 100vh;
+    background-color: #3d3d3d;
+    font-family: 'Poppins', sans-serif;
+    
+    .side-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 100;
+    }
+    
+    .conteudo-home {
+        flex: 1;
+        padding: 2rem;
+        margin-left: 25%;
+        
+        h1 {
+            color: #2980B9;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        h2 {
+            color: #f1f2f6;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                width: 50px;
+                height: 3px;
+                background-color: #2980B9;
+                border-radius: 3px;
+            }
+        }
+        
+        .cards-resumo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            
+            .card-resumo {
+                background-color: #2d2d2d;
+                border-radius: 15px;
+                padding: 1.5rem;
+                display: flex;
+                align-items: center;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                
+                &:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+                }
+                
+                .icone {
+                    margin-right: 1rem;
+                    
+                    svg {
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+                
+                .info {
+                    h3 {
+                        font-size: 0.9rem;
+                        color: #ffffff;
+                        margin-bottom: 0.3rem;
+                    }
+                    
+                    .numero {
+                        font-size: 1.8rem;
+                        font-weight: 600;
+                        color: #f1f2f6;
+                        margin-bottom: 0.3rem;
+                    }
+                    
+                    .variacao {
+                        font-size: 0.8rem;
+                        
+                        &.positiva {
+                            color: #27ae60;
+                        }
+                        
+                        &.negativa {
+                            color: #e74c3c;
+                        }
+                    }
+                }
+            }
+        }
+        
+        .secao-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            
+            @media (max-width: 992px) {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .secao-cortes-alta {
+            background-color: #2d2d2d;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            
+            .lista-cortes {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                
+                .card-corte {
+                    display: flex;
+                    align-items: center;
+                    
+                    .imagem-corte {
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 10px;
+                        overflow: hidden;
+                        margin-right: 1rem;
+                        background-color: #2d2d2d;
+                        
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                    
+                    .info-corte {
+                        flex: 1;
+                        
+                        h3 {
+                            font-size: 1.1rem;
+                            margin-bottom: 0.5rem;
+                            color: #f1f2f6;
+                        }
+                        
+                        .barra-popularidade {
+                            height: 8px;
+                            background-color: #ffffff;
+                            border-radius: 4px;
+                            margin-bottom: 0.5rem;
+                            
+                            .progresso {
+                                height: 100%;
+                                background-color: #2980B9;
+                                border-radius: 4px;
+                            }
+                        }
+                        
+                        p {
+                            font-size: 0.9rem;
+                            color: #f1f2f6;
+                        }
+                    }
+                }
+            }
+        }
+        
+        .secao-grafico {
+            background-color: #2d2d2d;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            
+            .container-grafico {
+                height: 250px;
+                display: flex;
+                align-items: flex-end;
+                
+                .grafico-barras {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: space-between;
+                    padding-top: 20px;
+                    
+                    .barra-container {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        width: 100%;
+                        
+                        .barra {
+                            width: 40px;
+                            background-color: #2980B9;
+                            border-radius: 4px 4px 0 0;
+                            transition: height 0.5s ease;
+                            
+                            &:hover {
+                                background-color: darken(#2980B9, 10%);
+                            }
+                        }
+                        
+                        .label {
+                            margin-top: 8px;
+                            font-size: 0.9rem;
+                            color: #f1f2f6;
+                        }
+                    }
+                }
+            }
+        }
+        
+        .secao-barbeiros {
+            margin-bottom: 2rem;
+            
+            .lista-barbeiros {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 1.5rem;
+                
+                .card-barbeiro {
+                    background-color: #2d2d2d;
+                    border-radius: 15px;
+                    padding: 1.5rem;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                    
+                    &:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+                    }
+                    
+                    .cabecalho-card {
+                        display: flex;
+                        margin-bottom: 1rem;
+                        
+                        img {
+                            width: 70px;
+                            height: 70px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            margin-right: 1rem;
+                            border: 2px solid #2980B9;
+                        }
+                        
+                        .info-barbeiro {
+                            h3 {
+                                font-size: 1.2rem;
+                                margin-bottom: 0.3rem;
+                                color: #ffffff;
+                            }
+                            
+                            .especialidade {
+                                font-size: 0.9rem;
+                                color: #f1f2f6;
+                                margin-bottom: 0.5rem;
+                            }
+                            
+                            .avaliacao {
+                                display: flex;
+                                align-items: center;
+                                
+                                .estrelas {
+                                    display: flex;
+                                    margin-right: 0.5rem;
+                                    
+                                    .estrela {
+                                        color: #ddd;
+                                        font-size: 1rem;
+                                        
+                                        &.ativa {
+                                            color: #f1c40f;
+                                        }
+                                    }
+                                }
+                                
+                                .nota {
+                                    font-size: 0.9rem;
+                                    font-weight: 600;
+                                    color: #f1f2f6;
+                                }
+                            }
+                        }
+                    }
+                    
+                    .endereco {
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 1.5rem;
+                        padding-bottom: 1rem;
+                        border-bottom: 1px solid #eee;
+                        
+                        svg {
+                            margin-right: 0.5rem;
+                            flex-shrink: 0;
+                        }
+                        
+                        p {
+                            font-size: 0.9rem;
+                            color: #f1f2f6;
+                            margin: 1em;
+                        }
+                    }
+                    
+                    .btn-agendar {
+                        display: block;
+                        width: 100%;
+                        padding: 0.8rem;
+                        background-color: #2980B9;
+                        color: #f1f2f6;
+                        text-align: center;
+                        border-radius: 8px;
+                        font-weight: 500;
+                        text-decoration: none;
+                        transition: background-color 0.3s ease;
+                        
+                        &:hover {
+                            background-color: darken(#2980B9, 10%);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @media (max-width: 768px) {
+        flex-direction: column;
+        
+        .conteudo-home {
+            margin-left: 0;
+            padding-top: 60px;
+            padding: 1rem;
+        }
+    }
+}
+
