@@ -1,10 +1,12 @@
 import { Router } from 'express';
 import { BarbeiroDelete, BarbeiroGet, BarbeiroPost } from '../repository/barbeiroRepository.js';
+import ValidarBarbeiro from '../validation/barbeiroValidation.js';
 
 const endpoint = Router();
 
 endpoint.post("/barbeiro", async (req ,resp) => {
     try {
+        ValidarBarbeiro(req);
         let obj = req.body;
         let id = await BarbeiroPost(obj);
 

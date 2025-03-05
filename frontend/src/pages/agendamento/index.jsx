@@ -2,10 +2,44 @@ import MenuLateral from "../../components/menuLateral"
 import './index.scss';
 import Calendario from '../../components/calendario';
 import CardHorario from '../../components/cardHorario';
-import { Link } from "react-router-dom";
-import Rodape from '../../components/rodape';
+import { useEffect, useState } from "react";
+import { toast, Toaster } from 'react-hot-toast';
+import axios from 'axios';
 
 export default function Agendamento() {
+    const [horario, setHorario] = useState('');
+    const [data, setData] = useState('');
+    const [nomeServico, setNomeServico] = useState('');
+
+    useEffect(() => {
+        const servico = localStorage.getItem('servicoEscolhido');
+        if (servico) setNomeServico(servico);
+    }, []);
+
+    async function confirmarAgendamento() {
+
+        let dataFormatada = data;
+
+        if (data instanceof Date) {
+            dataFormatada = data.toISOString().split('T')[0];
+        }
+
+        try {
+            let url = 'http://localhost:3002/agendar'
+            let obj = {
+                nome: nomeServico,
+                horario: horario,
+                data: dataFormatada
+            }
+            let resp = await axios.post(url, obj);
+
+            toast.success('Agendamento realizado com sucesso!');
+        } catch (error) {
+            console.error('Erro ao agendar:', error.response?.data || error.message);
+            toast.error('Erro ao realizar o agendamento.');
+        }
+    }
+
     return (
 
         <div className='secao-agendamento'>
@@ -14,7 +48,7 @@ export default function Agendamento() {
             </div>
             <div>
                 <div className="content">
-                    <Calendario />
+                    <Calendario onDateChange={setData} />
 
                     <div className="title">
                         <h1>Horários</h1>
@@ -22,22 +56,15 @@ export default function Agendamento() {
                     </div>
 
                     <div className="cards">
-                        <CardHorario horario={"08:00"} />
-                        <CardHorario horario={"08:30"} />
-                        <CardHorario horario={"09:00"} />
-                        <CardHorario horario={"10:00"} />
-                        <CardHorario horario={"10:30"} />
-                        <CardHorario horario={"11:00"} />
-                        <CardHorario horario={"11:30"} />
-                        <CardHorario horario={"12:00"} />
-                        <CardHorario horario={"12:30"} />
+                        <CardHorario/>
 
                         <div className="botao">
-                            <button>Confirmar agendamento</button>
+                            <button onClick={confirmarAgendamento}>Confirmar agendamento</button>
                         </div>
                     </div>
                 </div>
             </div>
+            <Toaster />
         </div>
 
     );

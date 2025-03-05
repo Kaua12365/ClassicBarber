@@ -1,32 +1,46 @@
-.cardHorario {
+.cardContainer {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 60px;
-    padding: 50px;
-    .cardzin {
+
+    .cardHorario {
         display: flex;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
-        text-align: center;
-        border: 3px solid #2980B9;
-        width: 400px;
-        height: 70px;
-        border-radius: 15px;
-        cursor: pointer;
-        transition: .3s;
+        flex-wrap: wrap;
+        gap: 60px;
+        padding: 50px;
 
-        &:hover{
-            background-color: #2980B9;
-            border: 2px solid #fff;
-        }
+        .cardzin {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 3px solid #2980B9;
+            width: 400px;
+            height: 70px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: .3s;
 
-        h1 {
-            color: #fff;
-            font: 500 35px poppins;
-            margin: 0;
+            &:hover {
+                background-color: #2980B9;
+                border: 2px solid #fff;
+            }
+
+            &.clicked {
+                background-color: #2980B9;
+                border: 2px solid #fff;
+            }
+
+            h1 {
+                color: #fff;
+                font: 500 35px poppins;
+                margin: 0;
+            }
         }
     }
 }

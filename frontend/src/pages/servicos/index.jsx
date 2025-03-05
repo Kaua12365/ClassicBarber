@@ -1,9 +1,21 @@
 import './index.scss';
 import MenuLateral from "../../components/menuLateral"
 import Card from '../../components/card';
+import { useNavigate } from 'react-router-dom';
 
 export default function Servicos() {
+    const navigate = useNavigate();
 
+    function escolherServico(nomeServico) {
+        console.log("Serviço selecionado:", nomeServico);
+        localStorage.setItem('servicoEscolhido', nomeServico);
+        
+        setTimeout(() => {
+            navigate('/agendamento');
+        }, 100);
+    }
+    
+    
     return (
         <div className="secao-servicos">
              <MenuLateral className="side-menu" /> 
@@ -15,12 +27,12 @@ export default function Servicos() {
             <h2>O Melhor Para Nossos Clientes</h2>
 
             <div className="cards">
-                <Card imagem={"/assets/images/pracima.png"} titulo={"Corte de cabelo"} />
-                <Card imagem={"/assets/images/Razor Barber.png"} titulo={"Barba"} />
-                <Card imagem={"/assets/images/pracima.png"} titulo={"Corte de cabelo"} />
-                <Card imagem={"/assets/images/Razor Barber.png"} titulo={"Barba"} />
-                <Card imagem={"/assets/images/pracima.png"} titulo={"Corte de cabelo"} />
-                <Card imagem={"/assets/images/Razor Barber.png"} titulo={"Barba"} />
+                <Card imagem={"/assets/images/pracima.png"} titulo={"Corte de cabelo"} onClick={() => escolherServico("Corte de cabelo")} />
+                <Card imagem={"/assets/images/Razor Barber.png"} titulo={"Barba"} onClick={() => escolherServico("Barba")} />
+                <Card imagem={"/assets/images/pracima.png"} titulo={"Corte de cabelo"} onClick={() => escolherServico("Corte de cabelo")}/>
+                <Card imagem={"/assets/images/Razor Barber.png"} titulo={"Barba"} onClick={() => escolherServico("Barba")}/>
+                <Card imagem={"/assets/images/pracima.png"} titulo={"Corte de cabelo"} onClick={() => escolherServico("Corte de cabelo")}/>
+                <Card imagem={"/assets/images/Razor Barber.png"} titulo={"Barba"} onClick={() => escolherServico("Barba")}/>
             </div>
             </div>
             </div>

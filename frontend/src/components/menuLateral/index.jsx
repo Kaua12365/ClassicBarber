@@ -5,11 +5,10 @@ import { useState, useEffect } from "react"
 export default function Cabecalho() {
   const [menuSelecionado, setMenuSelecionado] = useState("home")
   const location = useLocation()
-  
-  // Update selected menu based on current path
+
   useEffect(() => {
     const path = location.pathname
-    
+
     if (path.includes("/home")) {
       setMenuSelecionado("home")
     } else if (path.includes("/servicos")) {

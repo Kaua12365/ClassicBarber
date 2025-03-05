@@ -19,3 +19,11 @@ CREATE TABLE tb_barbeiros (
     numero INT NOT NULL UNIQUE,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE tb_agendamentos (
+    id int primary key AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    horario TIME NOT NULL,
+    data date NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
