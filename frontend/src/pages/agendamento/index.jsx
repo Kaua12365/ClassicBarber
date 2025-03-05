@@ -28,20 +28,22 @@ export default function Agendamento() {
             let url = 'http://localhost:3002/agendar'
             let obj = {
                 nome: nomeServico,
-                horario: horario,
+                horario,
                 data: dataFormatada
             }
             let resp = await axios.post(url, obj);
 
             toast.success('Agendamento realizado com sucesso!');
         } catch (error) {
-            console.error('Erro ao agendar:', error.response?.data || error.message);
-            toast.error('Erro ao realizar o agendamento.');
+            if (error.response && error.response.data) {
+                toast.error(error.response.data.error);
+            } else {
+                toast.error('Erro inesperado, tente novamente.');
+            }
         }
     }
 
     return (
-
         <div className='secao-agendamento'>
             <div>
                 <MenuLateral />
@@ -56,7 +58,8 @@ export default function Agendamento() {
                     </div>
 
                     <div className="cards">
-                        <CardHorario/>
+                        <CardHorario onHorarioChange={setHorario} />
+
 
                         <div className="botao">
                             <button onClick={confirmarAgendamento}>Confirmar agendamento</button>

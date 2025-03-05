@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './index.scss';
 
-export default function CardHorario() {
+export default function CardHorario({ onHorarioChange }) {
   const [activeCard, setActiveCard] = useState(null);
 
   const horarios = [
@@ -16,7 +16,8 @@ export default function CardHorario() {
   ];
 
   const handleClick = (id) => {
-    setActiveCard(activeCard === id ? null : id); 
+    setActiveCard(activeCard === id ? null : id);
+    onHorarioChange(horarios[id]);
   };
 
   return (
