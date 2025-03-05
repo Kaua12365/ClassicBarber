@@ -22,6 +22,8 @@ export default function Login() {
         try {
             let resp = await axios.post(url, obj);
             localStorage.setItem('USUARIO', JSON.stringify(resp.data));
+            localStorage.setItem('id', resp.data.id)
+            console.log(`ID:`, resp.data.id)
             Navigate("/home");
 
         } catch (error) {

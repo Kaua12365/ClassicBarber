@@ -1,4 +1,4 @@
-import { Login, UsuarioDelete, UsuarioGet, UsuarioPost } from "../repository/usuarioRepository.js";
+import { Login, UsuarioDelete, UsuarioGet, UsuarioPost, UsuarioPUT } from "../repository/usuarioRepository.js";
 import { Router } from "express";
 import ValidarUsuario from '../validation/usuarioValidation.js';
 
@@ -44,12 +44,12 @@ endpoint.delete("/usuario", async (req, resp) => {
 
         if (linha > 0) {
             resp.send()
-        }else{
+        } else {
             resp.send({
                 erro: "Nenhuma linha encontrada."
             })
         }
-        
+
     } catch (err) {
         resp.status(400).send({
             erro: err.message
@@ -70,7 +70,12 @@ endpoint.post("/Login", async (req, resp) => {
         if (login == null) {
             return resp.status(401).send({ erro: "Usuário ou senha incorreto(s)" });
         } else {
-            return resp.send({ nome: credenciais.nome });
+            resp.send({
+                id: login.id,
+                email: credenciais.email,
+                senha: credenciais.senha,
+                nome: login.nome
+            });
         }
     } catch (err) {
         return resp.status(400).send({
@@ -79,5 +84,25 @@ endpoint.post("/Login", async (req, resp) => {
     }
 });
 
+endpoint.put("/usuario", async (req, resp) => {
+    try {
+        let obj = req.body;
+        let id = req.query.id;
+        let linha = await UsuarioPUT(obj, id);
+
+        if (linha > 0) {
+            resp.send()
+        } else {
+            resp.send({
+                erro: "Nenhuma linha encontrada."
+            })
+        }
+
+    } catch (err) {
+        return resp.status(400).send({
+            erro: err.message
+        });
+    }
+});
 
 export default endpoint;

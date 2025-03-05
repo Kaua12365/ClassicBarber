@@ -1,63 +1,92 @@
-import MenuLateral from "../../components/menuLateral"
-import "./index.scss"
-import { useState } from "react"
+import axios from "axios";
+import MenuLateral from "../../components/menuLateral";
+import "./index.scss";
+import { useState } from "react";
+import { toast, Toaster } from "react-hot-toast";
 
 export default function Perfil() {
-  const [formData, setFormData] = useState({
-    nome: "Davi Brito",
-    telefone: "(11) 99999-9999",
-    email: "davi.brito@email.com",
-    senha: "",
-    novaSenha: "",
-    confirmarSenha: "",
-  })
+  const [id, setId] = useState(localStorage.getItem("id") || "");
+  const [nome, setNome] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [email, setEmail] = useState("");
+  const [senhaAntiga, setSenhaAntiga] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [profileImage, setProfileImage] = useState("/assets/images/davi.svg");
+  const [previewImage, setPreviewImage] = useState(null);
 
+  async function AlterarPerfil() {
+    try {
+      if (!id) {
+        toast.error("ID do usuário não encontrado.");
+        return;
+      }
 
-  const [profileImage, setProfileImage] = useState("/assets/images/davi.svg")
-  const [previewImage, setPreviewImage] = useState(null)
+      const url = `http://localhost:3002/usuario/?id=${id}`;
+      const obj = {
+        nome: nome,
+        telefone: telefone,
+        email: email,
+        senha: senhaAntiga,
+        novaSenha: senha,
+        confirmarSenha: confirmarSenha,
+      };
 
+      if (senha !== confirmarSenha) {
+        toast.error("As senhas não coincidem.");
+        return;
+      }
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData({
-      ...formData,
-      [name]: value,
-    })
+      const resp = await axios.put(url, obj);
+      
+      toast.success("Perfil atualizado com sucesso!");
+      
+    } catch (error) {
+      console.error('Erro ao alterar perfil:', error);
+      if (error.response) {
+        toast.error(`Erro: ${error.response.data.message || "Erro ao alterar perfil"}`);
+      } else {
+        toast.error("Erro ao alterar perfil.");
+      }
+    }
   }
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "nome") setNome(value);
+    if (name === "telefone") setTelefone(value);
+    if (name === "email") setEmail(value);
+    if (name === "senha") setSenhaAntiga(value);
+    if (name === "novaSenha") setSenha(value);
+    if (name === "confirmarSenha") setConfirmarSenha(value);
+  };
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0]
-      const imageUrl = URL.createObjectURL(file)
-      setPreviewImage(imageUrl)
+      const file = e.target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      setPreviewImage(imageUrl);
     }
-  }
-
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-  
-    alert("Perfil atualizado com sucesso!")
-
+    e.preventDefault();
+    AlterarPerfil();
     if (previewImage) {
-      setProfileImage(previewImage)
-      setPreviewImage(null)
+      setProfileImage(previewImage);
+      setPreviewImage(null);
     }
-  }
-
+  };
 
   const handleCancel = () => {
-    setFormData({
-      nome: "Davi Brito",
-      telefone: "(11) 99999-9999",
-      email: "davi.brito@email.com",
-      senha: "",
-      novaSenha: "",
-      confirmarSenha: "",
-    })
-    setPreviewImage(null)
-  }
+    setNome("");
+    setTelefone("");
+    setEmail("");
+    setSenhaAntiga("");
+    setSenha("");
+    setConfirmarSenha("");
+    setPreviewImage(null);
+  };
 
   return (
     <div className="secao-perfil">
@@ -97,14 +126,21 @@ export default function Perfil() {
                 />
               </div>
             </div>
-            <p className="nome-usuario">{formData.nome}</p>
+            <p className="nome-usuario">{nome || "Usuário"}</p>
           </div>
 
           <div className="formulario-perfil">
             <form onSubmit={handleSubmit}>
               <div className="campo-form">
                 <label htmlFor="nome">Nome</label>
-                <input type="text" id="nome" name="nome" value={formData.nome} onChange={handleInputChange} required />
+                <input
+                  type="text"
+                  id="nome"
+                  name="nome"
+                  value={nome}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
 
               <div className="campo-form">
@@ -113,7 +149,7 @@ export default function Perfil() {
                   type="tel"
                   id="telefone"
                   name="telefone"
-                  value={formData.telefone}
+                  value={telefone}
                   onChange={handleInputChange}
                   required
                 />
@@ -125,7 +161,7 @@ export default function Perfil() {
                   type="email"
                   id="email"
                   name="email"
-                  value={formData.email}
+                  value={email}
                   onChange={handleInputChange}
                   required
                 />
@@ -136,7 +172,13 @@ export default function Perfil() {
 
                 <div className="campo-form">
                   <label htmlFor="senha">Senha Atual</label>
-                  <input type="password" id="senha" name="senha" value={formData.senha} onChange={handleInputChange} />
+                  <input
+                    type="password"
+                    id="senha"
+                    name="senha"
+                    value={senhaAntiga}
+                    onChange={handleInputChange}
+                  />
                 </div>
 
                 <div className="campo-form">
@@ -145,7 +187,7 @@ export default function Perfil() {
                     type="password"
                     id="novaSenha"
                     name="novaSenha"
-                    value={formData.novaSenha}
+                    value={senha}
                     onChange={handleInputChange}
                   />
                 </div>
@@ -156,7 +198,7 @@ export default function Perfil() {
                     type="password"
                     id="confirmarSenha"
                     name="confirmarSenha"
-                    value={formData.confirmarSenha}
+                    value={confirmarSenha}
                     onChange={handleInputChange}
                   />
                 </div>
@@ -174,7 +216,7 @@ export default function Perfil() {
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
-  )
+  );
 }
-

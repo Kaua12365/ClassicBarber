@@ -34,7 +34,7 @@ export async function UsuarioDelete(user) {
 
 export async function Login(user) {
     const comando = `
-    select id, email, senha
+    select id, nome, email, senha
     from tb_usuarios
     where email = ? and
     senha = ?;
@@ -44,4 +44,26 @@ export async function Login(user) {
     let infos = resp[0][0];
 
     return infos;
+}
+
+export async function UsuarioPUT(user, id) {
+    const comando = `UPDATE tb_usuarios SET ${
+        [
+            user.nome && 'nome = ?',
+            user.telefone && 'telefone = ?',
+            user.email && 'email = ?',
+            user.senha && 'senha = ?'
+        ]
+        .filter(Boolean)
+        .join(', ')
+    } WHERE id = ?`;
+
+    const valores = [
+        user.nome, user.telefone, user.email, user.senha
+    ].filter(Boolean);
+
+    valores.push(id); 
+
+    const resp = await con.query(comando, valores);
+    return resp[0].affectedRows;
 }
