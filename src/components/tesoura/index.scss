@@ -1,0 +1,12 @@
+.img-tesoura {
+    position: absolute;
+    left: 0%;
+    top: 28.3%;
+    max-width: 100%;
+}
+
+@media screen and (max-width: 1100px) {
+    .img-tesoura {
+        display: none !important;
+    }
+}

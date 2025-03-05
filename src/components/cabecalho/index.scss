@@ -1,0 +1,46 @@
+.cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 25px;
+    width: 100%;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
+    background-color: #3D3D3D;
+    
+    .esquerda {
+        display: flex;
+        flex-direction: row;
+        padding: 30px;
+
+        img {
+            max-width: 110px;
+            height: 100px;
+        }
+
+        a {
+            font: 500 40px Style Script;
+            color: #fff;
+            line-height: 2.5;
+            text-decoration: none;
+        }
+    }
+
+    .direita {
+        display: flex;
+        flex-direction: row;
+        gap: 65px;
+        padding: 30px;
+
+        a {
+            font: 500 18px poppins;
+            text-decoration: none;
+            color: #fff;
+        }
+    }
+    
+    @media screen and (max-width: 850px) {
+        .direita {
+            display: none !important;
+        }
+    }
+}

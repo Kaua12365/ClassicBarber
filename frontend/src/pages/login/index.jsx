@@ -22,7 +22,7 @@ export default function Login() {
         try {
             let resp = await axios.post(url, obj);
             localStorage.setItem('USUARIO', JSON.stringify(resp.data));
-            Navigate("/");
+            Navigate("/home");
 
         } catch (error) {
             if (error.response && error.response.data) {

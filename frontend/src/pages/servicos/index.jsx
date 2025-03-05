@@ -6,12 +6,13 @@ export default function Servicos() {
 
     return (
         <div className="secao-servicos">
-             <MenuLateral/> 
-            <div>
+             <MenuLateral className="side-menu" /> 
+            <div className="content">
+                <div >
             <div className="texto">
-                <h1>NOSSOS </h1> <h1 id='textoAzul'>SERVIÇOS</h1>
+                <h1>Nossos </h1> <h1 id='textoAzul'>Serviços</h1>
             </div>
-            <h2>O MELHOR PARA NOSSOS CLIENTES</h2>
+            <h2>O Melhor Para Nossos Clientes</h2>
 
             <div className="cards">
                 <Card imagem={"/assets/images/pracima.png"} titulo={"Corte de cabelo"} />
@@ -20,6 +21,7 @@ export default function Servicos() {
                 <Card imagem={"/assets/images/Razor Barber.png"} titulo={"Barba"} />
                 <Card imagem={"/assets/images/pracima.png"} titulo={"Corte de cabelo"} />
                 <Card imagem={"/assets/images/Razor Barber.png"} titulo={"Barba"} />
+            </div>
             </div>
             </div>
         </div>

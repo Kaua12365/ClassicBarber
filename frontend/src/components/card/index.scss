@@ -10,12 +10,32 @@
     border-radius: 20px;
     gap: 40px;
     border-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease; 
+
     img{
         width: 4em;
+        transition: filter 0.3s ease; 
     }
     
     h1{
         color: #fff;
         font: 500 22px poppins;
+        transition: color 0.3s ease; 
+    }
+
+    
+    &:hover {
+        transform: scale(1.05);
+        background-color: #fff; 
+        border-color: #2980B9; 
+        
+        img {
+            filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(190deg) brightness(80%) contrast(119%);
+        }
+        
+        h1 {
+            color: #2980B9; 
+        }
     }
 }
