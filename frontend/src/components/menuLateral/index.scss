@@ -1,7 +1,7 @@
 .side-menu {
     font-family: Poppins;
     background-color: #2980b9;
-    width: 400px;
+    width: 25%;
     border-radius: 0 20px 20px 0;
     height: 1004px;
     overflow-y: hidden;
@@ -35,6 +35,10 @@
         justify-content: space-evenly;
         font-size: 1.2em;
 
+        a {
+            text-decoration: none; /* Remove underline from links */
+        }
+
         div {
             height: 4em;
             width: 260px;
@@ -57,6 +61,14 @@
             svg {
                 fill: #2980b9;
                 transition: fill 0.5s ease-in-out;
+            }
+        }
+        .selecionado {
+            background-color: #f1f2f6;
+            fill: #f1f2f6;
+            color: #2980b9;
+            svg {
+                fill: #2980b9;
             }
         }
         svg {

@@ -1,16 +1,22 @@
 .calendar-container {
   max-width: 90%;
   width: 100%;
-  height: 80vh;
-  margin: 0 auto;
+  height: 90vh;
+  margin: 0 auto; 
   padding: 60px;
   text-align: center;
   border-radius: 10px;
   font-family: 'Poppins', sans-serif;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
 
   .custom-calendar {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background-color: transparent;
     border: none;
   }
@@ -21,6 +27,17 @@
     font-size: 24px;
     background: transparent;
   }
+  
+  .custom-calendar .react-calendar__navigation__label {
+    text-transform: capitalize;
+    color: #2980B9;
+  }
+  
+  .custom-calendar .react-calendar__navigation__label__labelText {
+    text-transform: capitalize;
+    font-size: 1.5em;
+    color: #2980B9;
+  }
 
   .custom-calendar .react-calendar__navigation button {
     color: white;
@@ -30,7 +47,6 @@
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
   }
-
 
   .custom-calendar .react-calendar__month-view__weekdays {
     font-size: 29px;
@@ -60,6 +76,7 @@
   }
 
   .custom-calendar .react-calendar__tile--active {
+    text-transform: capitalize;
     background: #2980B9;
     border-radius: 5px;
     font-weight: bold;
@@ -86,26 +103,24 @@
   .react-calendar__navigation__arrow:hover {
     background-color: transparent !important;
     color: white !important; 
-}
+  }
 
-.custom-calendar .react-calendar__navigation button {
-  color: white !important; 
-  background: transparent !important;
-  border: none;
-  font-size: 29px;
-  cursor: pointer;
-  font-family: 'Poppins', sans-serif;
-}
+  .custom-calendar .react-calendar__navigation button {
+    color: white !important; 
+    background: transparent !important;
+    border: none;
+    font-size: 29px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+  }
 
-.custom-calendar .react-calendar__navigation button:hover {
-  background-color: transparent !important;
-  color: #2980B9 !important; 
-}
+  .custom-calendar .react-calendar__navigation button:hover {
+    background-color: transparent !important;
+    color: #2980B9 !important; 
+  }
 
-.custom-calendar .react-calendar__navigation button:active {
-  background-color: transparent !important;
-  color: #2980B9 !important; 
-}
-
-
+  .custom-calendar .react-calendar__navigation button:active {
+    background-color: transparent !important;
+    color: #2980B9 !important; 
+  }
 }
