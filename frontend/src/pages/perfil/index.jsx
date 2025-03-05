@@ -68,49 +68,50 @@ export default function Perfil() {
 
   async function AlterarPerfil() {
     try {
-      if (!id) {
-        toast.error("ID do usuário não encontrado.");
-        return;
-      }
-  
-      if (senha !== confirmarSenha) {
-        toast.error("As senhas não coincidem.");
-        return;
-      }
-  
-      const url = `http://localhost:3002/usuario/?id=${id}`;
-      const obj = {
-        nome: nome,
-        telefone: telefone,
-        email: email,
-        senha: senha,
-      };
-  
-      const resp = await axios.put(url, obj);
-  
-      const usuarioAtualizado = {
-        ...storage("USUARIO"), 
-        nome: nome,
-        telefone: telefone,
-        email: email,
-      };
-  
-      storage("USUARIO", usuarioAtualizado); 
-  
-      setNome(usuarioAtualizado.nome);
-      setTelefone(usuarioAtualizado.telefone);
-      setEmail(usuarioAtualizado.email);
-  
-      toast.success("Perfil atualizado com sucesso!");
+        if (!id) {
+            toast.error("ID do usuário não encontrado.");
+            return;
+        }
+
+        if (senha !== confirmarSenha) {
+            toast.error("As senhas não coincidem.");
+            return;
+        }
+
+        const url = `http://localhost:3002/usuario/?id=${id}`;
+        const obj = {
+            nome: nome,
+            telefone: telefone,
+            email: email,
+            senha: senha,
+        };
+
+        const resp = await axios.put(url, obj);
+        const usuarioAtualizado = {
+            ...storage("USUARIO"),
+            nome: nome,
+            telefone: telefone,
+            email: email,
+        };
+
+        storage("USUARIO", usuarioAtualizado);
+
+        // Atualizar o estado do React com os novos dados
+        setNome(usuarioAtualizado.nome);
+        setTelefone(usuarioAtualizado.telefone);
+        setEmail(usuarioAtualizado.email);
+
+        toast.success("Perfil atualizado com sucesso!");
     } catch (error) {
-      console.error("Erro ao alterar perfil:", error);
-      if (error.response) {
-        toast.error(`Erro: ${error.response.data.message || "Erro ao alterar perfil"}`);
-      } else {
-        toast.error("Erro ao alterar perfil.");
-      }
+        console.error("Erro ao alterar perfil:", error);
+
+        if (error.response && error.response.data.erro) {
+            toast.error(error.response.data.erro);  
+        } else {
+            toast.error("Erro ao alterar perfil.");
+        }
     }
-  }
+}
 
   const handleInputChange = (e) => {
     const { name, value } = e.target

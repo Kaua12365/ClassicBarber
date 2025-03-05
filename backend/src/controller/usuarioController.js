@@ -7,6 +7,9 @@ const endpoint = Router();
 endpoint.post("/usuario", async (req, resp) => {
     try {
         ValidarUsuario(req);
+        if (value.length > 11) {
+            return { erro: "Número de telefone inválido. Digite no máximo 11 dígitos." };
+        }
 
         let obj = req.body;
         let id = await UsuarioPost(obj);
@@ -89,14 +92,25 @@ endpoint.put("/usuario", async (req, resp) => {
     try {
         let obj = req.body;
         let id = req.query.id;
+
+        if (obj.telefone) {
+            let telefoneLimpo = obj.telefone.replace(/\D/g, '');
+
+            if (telefoneLimpo.length < 10 || telefoneLimpo.length > 11) {
+                return resp.status(400).send({
+                    erro: "Digite um número de telefone válido"
+                });
+            }
+        }
+
         let linha = await UsuarioPUT(obj, id);
 
         if (linha > 0) {
-            resp.send()
+            resp.send();
         } else {
-            resp.send({
+            resp.status(404).send({
                 erro: "Nenhuma linha encontrada."
-            })
+            });
         }
 
     } catch (err) {
