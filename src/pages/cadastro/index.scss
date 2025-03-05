@@ -1,0 +1,63 @@
+.secao-cadastro{
+    width: 100%;
+    background-color: #3D3D3D;
+    height: 100vh;
+    overflow-y: hidden;
+    position: fixed;
+    
+    .cadastrar {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 70px;
+        width: 100%;
+        padding: 30px;
+
+        h1 {
+            font: 500 45px poppins;
+            color: #fff;
+        }
+
+        .inputs {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 45px;
+            width: 100%;
+
+            input {
+                width: 80%;
+                max-width: 750px;
+                height: 75px;
+                border-radius: 20px;
+                background-color: #2B2B2B;
+                border-color: #fff;
+                padding-left: 15px;
+                font: 500 15px poppins;
+                z-index: 1;
+                outline: none;
+            }
+        }
+
+        button {
+            max-width: 750px;
+            width: 70%;
+            height: 70px;
+            border-radius: 20px;
+            background-color: #2980B9;
+            color: #fff;
+            border-color: #fff;
+            font: 500 17px poppins;
+            cursor: pointer;
+            z-index: 1;
+
+            &:hover {
+                background-color: #fff;
+                color: #2980B9;
+                border-color: #2980B9;
+            }
+        }
+    }
+}

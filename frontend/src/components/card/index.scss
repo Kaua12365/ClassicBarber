@@ -4,12 +4,15 @@
     justify-content: center;
     flex-direction: column;
     border: 1px solid #000;
-    width: 470px;
-    height: 370px;
+    width: 300px;
+    height: 200px;
     background-color: #2980B9;
     border-radius: 20px;
     gap: 40px;
     border-color: #fff;
+    img{
+        width: 4em;
+    }
     
     h1{
         color: #fff;
