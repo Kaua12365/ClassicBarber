@@ -32,11 +32,11 @@ export default function Servicos() {
 
             <div className="cards">
                 <Card imagem={"/assets/images/pracima.png"} titulo={"Corte de cabelo"} onClick={() => escolherServico("Corte de cabelo")} />
-                <Card imagem={"/assets/images/Razor Barber.png"} titulo={"Barba"} onClick={() => escolherServico("Barba")} />
-                <Card imagem={"/assets/images/pracima.png"} titulo={"Corte de cabelo"} onClick={() => escolherServico("Corte de cabelo")}/>
-                <Card imagem={"/assets/images/Razor Barber.png"} titulo={"Barba"} onClick={() => escolherServico("Barba")}/>
-                <Card imagem={"/assets/images/pracima.png"} titulo={"Corte de cabelo"} onClick={() => escolherServico("Corte de cabelo")}/>
-                <Card imagem={"/assets/images/Razor Barber.png"} titulo={"Barba"} onClick={() => escolherServico("Barba")}/>
+                <Card imagem={"/assets/images/barba.svg"} titulo={"Barba"} onClick={() => escolherServico("Barba")} />
+                <Card imagem={"/assets/images/barbacabelo.svg"} titulo={"Corte de Cabelo + Barba"} onClick={() => escolherServico("Corte de Cabelo e Barba")}/> 
+                <Card imagem={"/assets/images/Sombrancelha.svg"} titulo={"Sobrancelha"} onClick={() => escolherServico("Sobrancelha")}/>
+                <Card imagem={"/assets/images/pigmentacao.svg"} titulo={"Pigmentação"} onClick={() => escolherServico("Pigmentaçãoo")}/>
+                <Card imagem={"/assets/images/pacote.svg"} titulo={"Pacote Completo"} onClick={() => escolherServico("Pacote Completo")}/>    
             </div>
             </div>
             </div>
