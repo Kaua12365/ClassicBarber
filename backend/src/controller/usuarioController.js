@@ -78,7 +78,7 @@ endpoint.post("/Login", async (req, resp) => {
             });
         }
     } catch (err) {
-        return resp.status(400).send({
+        resp.status(400).send({
             erro: err.message
         });
     }
@@ -99,7 +99,7 @@ endpoint.put("/usuario", async (req, resp) => {
         }
 
     } catch (err) {
-        return resp.status(400).send({
+        resp.status(400).send({
             erro: err.message
         });
     }

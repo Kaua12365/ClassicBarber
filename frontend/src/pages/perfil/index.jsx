@@ -1,7 +1,7 @@
 import axios from "axios";
 import MenuLateral from "../../components/menuLateral";
 import "./index.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 
 export default function Perfil() {
@@ -85,6 +85,7 @@ export default function Perfil() {
     setConfirmarSenha("");
     setPreviewImage(null);
   };
+
 
   return (
     <div className="secao-perfil">
