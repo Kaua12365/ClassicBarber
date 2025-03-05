@@ -2,14 +2,18 @@ import './index.scss';
 import MenuLateral from "../../components/menuLateral"
 import Card from '../../components/card';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function Servicos() {
     const navigate = useNavigate();
 
+    useEffect(() => {
+        localStorage.removeItem('servicoEscolhido');
+    }, []);
+
     function escolherServico(nomeServico) {
-        console.log("Serviço selecionado:", nomeServico);
         localStorage.setItem('servicoEscolhido', nomeServico);
-        
+            
         setTimeout(() => {
             navigate('/agendamento');
         }, 100);

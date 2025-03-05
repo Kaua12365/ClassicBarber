@@ -88,17 +88,15 @@ export default function Perfil() {
   
       const resp = await axios.put(url, obj);
   
-      // Atualizar Local Storage
       const usuarioAtualizado = {
-        ...storage("USUARIO"), // Mantém outras informações que não foram alteradas
+        ...storage("USUARIO"), 
         nome: nome,
         telefone: telefone,
         email: email,
       };
   
-      storage("USUARIO", usuarioAtualizado); // Salva os novos dados no local-storage
+      storage("USUARIO", usuarioAtualizado); 
   
-      // Atualizar o estado do React com os novos dados
       setNome(usuarioAtualizado.nome);
       setTelefone(usuarioAtualizado.telefone);
       setEmail(usuarioAtualizado.email);
