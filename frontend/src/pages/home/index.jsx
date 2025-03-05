@@ -1,3 +1,4 @@
+import Dashboard from "../../components/dashboard"
 import MenuLateral from "../../components/menuLateral"
 import "./index.scss"
 import { Link } from "react-router-dom"
@@ -190,7 +191,9 @@ export default function Home() {
 
           <div className="secao-grafico">
             <h2>Agendamentos Mensais</h2>
+            <Dashboard /> 
             <div className="container-grafico">{renderizarGrafico(dadosAgendamentos)}</div>
+            
           </div>
         </div>
 
