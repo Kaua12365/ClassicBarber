@@ -90,17 +90,6 @@ function Dashboard() {
             </CardContent>
           </Card>
         </Grid>
-
-        <Grid item xs={12} sm={6} md={6}>
-          <Card className="card">
-            <CardContent className="card-content">
-              <Typography className="card-title">Agendamentos</Typography>
-              <Typography className="card-value">{totalAgendamentos} Agendamentos</Typography>
-              <Typography className="card-value">{livre} Espaço Livre</Typography>
-              <Typography className="card-value">{((totalAgendamentos / total) * 100).toFixed(2)}% Agendado</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
       </Grid>
     </Box>
   );
