@@ -82,6 +82,7 @@
                     color: #f1f2f6;
                     text-align: center;
                     margin: 0;
+                    text-transform: capitalize;
                 }
             }
             
@@ -110,7 +111,7 @@
                             border-radius: 8px;
                             font-family: 'Poppins', sans-serif;
                             font-size: 1rem;
-                            
+
                             &:focus {
                                 outline: none;
                                 border-color: #2980B9;
