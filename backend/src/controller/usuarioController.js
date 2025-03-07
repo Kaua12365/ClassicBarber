@@ -1,15 +1,15 @@
 import { Login, UsuarioDelete, UsuarioGet, UsuarioPost, UsuarioPUT } from "../repository/usuarioRepository.js";
 import { Router } from "express";
 import ValidarUsuario from '../validation/usuarioValidation.js';
+import multer from 'multer';
+import storage from "../repository/multer.js";
 
 const endpoint = Router();
+const m = multer({ storage });
 
 endpoint.post("/usuario", async (req, resp) => {
     try {
         ValidarUsuario(req);
-        if (value.length > 11) {
-            return { erro: "Número de telefone inválido. Digite no máximo 11 dígitos." };
-        }
 
         let obj = req.body;
         let id = await UsuarioPost(obj);
@@ -118,6 +118,21 @@ endpoint.put("/usuario", async (req, resp) => {
             erro: err.message
         });
     }
+});
+
+endpoint.post('/multer', m.single('img'), (req, resp) => {
+
+    const { filename, originalname, destination, mimetype } = req.file;
+
+    const obj = {
+        fl: filename,
+        og: originalname,
+        dt: destination,
+        mt: mimetype
+    }
+
+    resp.send(obj);
+
 });
 
 export default endpoint;

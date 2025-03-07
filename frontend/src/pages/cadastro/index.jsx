@@ -82,7 +82,7 @@ export default function Cadastro() {
                         maxLength="15"
                     />
                     <input type="text" placeholder='Insira seu email.' value={email} onChange={e => setEmail(e.target.value)} />
-                    <input type="text" placeholder='Insira sua senha.' value={senha} onChange={e => setSenha(e.target.value)} />
+                    <input type="password" placeholder='Insira sua senha.' value={senha} onChange={e => setSenha(e.target.value)} />
                 </div>
 
                 <button onClick={Cadastrar}>Cadastrar</button>

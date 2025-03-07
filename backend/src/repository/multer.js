@@ -1,16 +1,14 @@
 import multer from 'multer';
-import { Router } from 'express';
 
-const servidor = Router();
-
-let uploadPerfil = multer({ dest: '/public/img' });
-
-servidor.post("/multer", uploadPerfil.single('imagem'), (req, resp) => {
-    let caminho = req.file.path;
-
-    resp.send({
-        caminho: caminho
-    });
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/img');
+  },
+  filename: function (req, file, cb) {
+    const type = file.originalname.split('.').pop();
+    const random = Math.random() * 100000;
+    cb(null, `${random}.${type}`);
+  }
 });
 
-export default servidor;
+export default storage;

@@ -30,41 +30,44 @@ export default function Perfil() {
 }
 
 
-  useEffect(() => {
-    const User = storage('USUARIO')
-    setId(User.id)
-    setNome(User.nome)
-    setEmail(User.email)
-    setTelefone(User.telefone)
-    
-    async function buscarDadosUsuario() {
-      try {
-        if (!id) {
-          setIsLoading(false)
-          return
-        }
-        const url = `http://localhost:3002/usuario/?id=${id}`
-        const response = await axios.get(url)
+useEffect(() => {
+  const User = storage('USUARIO');
+  setId(User.id);
+  setNome(User.nome);
+  setEmail(User.email);
+  setTelefone(User.telefone);
 
-        if (response.data) {
-          setNome(User.nome || "")
-          setTelefone(User.telefone || "")
-          setEmail(User.email || "")
-
-          if (User.imagem) {
-            setProfileImage(User.imagem)
-          }
-        }
-      } catch (error) {
-        console.error("Erro ao buscar dados do usuário:", error)
-        toast.error("Não foi possível carregar seus dados. Tente novamente mais tarde.")
-      } finally {
-        setIsLoading(false)
+  async function buscarDadosUsuario() {
+    try {
+      if (!id) {
+        setIsLoading(false);
+        return;
       }
-    }
 
-    buscarDadosUsuario()
-  }, [])
+      const url = `http://localhost:3002/usuario/?id=${id}`;
+      const response = await axios.get(url);
+
+      if (response.data) {
+        setNome(response.data.nome || "");
+        setTelefone(response.data.telefone || "");
+        setEmail(response.data.email || "");
+
+        if (response.data.imagem) {
+          setProfileImage(response.data.imagem);
+        }
+      }
+    } catch (error) {
+      console.error("Erro ao buscar dados do usuário:", error);
+      toast.error("Não foi possível carregar seus dados. Tente novamente mais tarde.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  buscarDadosUsuario();
+}, []);
+
+
 
   async function AlterarPerfil() {
     try {
@@ -96,7 +99,6 @@ export default function Perfil() {
 
         storage("USUARIO", usuarioAtualizado);
 
-        // Atualizar o estado do React com os novos dados
         setNome(usuarioAtualizado.nome);
         setTelefone(usuarioAtualizado.telefone);
         setEmail(usuarioAtualizado.email);
@@ -125,11 +127,25 @@ export default function Perfil() {
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0]
-      const imageUrl = URL.createObjectURL(file)
-      setPreviewImage(imageUrl)
+      const file = e.target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      setPreviewImage(imageUrl); 
+
+      const formData = new FormData();
+      formData.append('imagem', file); 
+
+      axios.post('http://localhost:3002/upload', formData)
+        .then((response) => {
+          const imagePath = response.data.caminho; 
+          setProfileImage(imagePath);
+        })
+        .catch((error) => {
+          console.error('Erro ao enviar a imagem:', error);
+          toast.error('Erro ao atualizar a imagem de perfil.');
+        });
     }
-  }
+}
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
