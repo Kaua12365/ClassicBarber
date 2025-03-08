@@ -3,12 +3,13 @@
     background-color: #2980b9;
     width: 25%;
     border-radius: 0 20px 20px 0;
-    height: 1004px;
+    height: 100vh;
     overflow-y: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+
     .profile-user {
         color: #f1f2f6;
         display: flex;
@@ -16,13 +17,18 @@
         flex-direction: row;
         justify-content: space-evenly;
         width: 25em;
-
+        
         h1 {
             font-weight: bold;
             font-size: 2em;
+            margin-left: -90px;
         }
         img {
-            width: 4em;
+            width: 5.2em;
+            height: 5.5em;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            image-rendering: auto;
         }
     }
     .pages {

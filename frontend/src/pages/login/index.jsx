@@ -23,7 +23,6 @@ export default function Login() {
             let resp = await axios.post(url, obj);
             localStorage.setItem('USUARIO', JSON.stringify(resp.data));
             localStorage.setItem('id', resp.data.id)
-            console.log(`ID:`, resp.data.id)
             Navigate("/home");
 
         } catch (error) {
@@ -56,7 +55,7 @@ export default function Login() {
                 <h1>Login</h1>
                 <div className="inputs">
                     <input type="text" placeholder='Insira seu email.' value={email} onChange={e => setEmail(e.target.value)} />
-                    <input type="text" placeholder='Insira sua senha.' value={senha} onChange={e => setSenha(e.target.value)} />
+                    <input type="password" placeholder='Insira sua senha.' value={senha} onChange={e => setSenha(e.target.value)} />
                 </div>
 
                 <button onClick={Login}>Confirmar</button>

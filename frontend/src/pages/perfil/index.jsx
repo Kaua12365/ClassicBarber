@@ -19,101 +19,105 @@ export default function Perfil() {
 
   function formatarTelefone(value) {
     value = value.replace(/\D/g, '');
-    
+
     if (value.length > 10) {
-        value = value.replace(/^(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+      value = value.replace(/^(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
     } else {
-        value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+      value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
     }
 
     return value;
-}
-
-
-useEffect(() => {
-  const User = storage('USUARIO');
-  setId(User.id);
-  setNome(User.nome);
-  setEmail(User.email);
-  setTelefone(User.telefone);
-
-  async function buscarDadosUsuario() {
-    try {
-      if (!id) {
-        setIsLoading(false);
-        return;
-      }
-
-      const url = `http://localhost:3002/usuario/?id=${id}`;
-      const response = await axios.get(url);
-
-      if (response.data) {
-        setNome(response.data.nome || "");
-        setTelefone(response.data.telefone || "");
-        setEmail(response.data.email || "");
-
-        if (response.data.imagem) {
-          setProfileImage(response.data.imagem);
-        }
-      }
-    } catch (error) {
-      console.error("Erro ao buscar dados do usuário:", error);
-      toast.error("Não foi possível carregar seus dados. Tente novamente mais tarde.");
-    } finally {
-      setIsLoading(false);
-    }
   }
 
-  buscarDadosUsuario();
-}, []);
+  useEffect(() => {
+    const User = storage('USUARIO');
+    setId(User.id);
+    setNome(User.nome);
+    setEmail(User.email);
+    setTelefone(User.telefone);
+    setProfileImage(User.imagem || "/assets/images/davi.svg");
 
+    async function buscarDadosUsuario() {
+      try {
+        if (!id) {
+          setIsLoading(false);
+          return;
+        }
 
+        const url = `http://localhost:3002/usuario/detalhes?id=${User.id}`;
+        const response = await axios.get(url);
+
+        if (response.data) {
+          setNome(response.data.nome || "");
+          setTelefone(response.data.telefone || "");
+          setEmail(response.data.email || "");
+
+          if (response.data.img) {
+            const imgUrl = `http://localhost:3002${response.data.img}`;
+            setProfileImage(imgUrl);
+          }
+        }
+      } catch (error) {
+        console.error("Erro ao buscar dados do usuário:", error);
+        toast.error("Não foi possível carregar seus dados. Tente novamente mais tarde.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    buscarDadosUsuario();
+  }, []);
 
   async function AlterarPerfil() {
     try {
-        if (!id) {
-            toast.error("ID do usuário não encontrado.");
-            return;
-        }
-
-        if (senha !== confirmarSenha) {
-            toast.error("As senhas não coincidem.");
-            return;
-        }
-
-        const url = `http://localhost:3002/usuario/?id=${id}`;
-        const obj = {
-            nome: nome,
-            telefone: telefone,
-            email: email,
-            senha: senha,
-        };
-
-        const resp = await axios.put(url, obj);
-        const usuarioAtualizado = {
-            ...storage("USUARIO"),
-            nome: nome,
-            telefone: telefone,
-            email: email,
-        };
-
-        storage("USUARIO", usuarioAtualizado);
-
-        setNome(usuarioAtualizado.nome);
-        setTelefone(usuarioAtualizado.telefone);
-        setEmail(usuarioAtualizado.email);
-
-        toast.success("Perfil atualizado com sucesso!");
+      if (!id) {
+        toast.error("ID do usuário não encontrado.");
+        return;
+      }
+  
+      if (senha != confirmarSenha) {
+        toast.error("As senhas não coincidem.");
+        return;
+      }
+  
+      const url = `http://localhost:3002/usuario/?id=${id}`;
+  
+      const obj = {
+        nome: nome,
+        telefone: telefone,
+        email: email,
+        senha: senha,
+        img: profileImage,
+      };
+  
+      const resp = await axios.put(url, obj);
+  
+      const usuarioAtualizado = {
+        ...storage("USUARIO"),
+        nome: nome,
+        telefone: telefone,
+        email: email,
+        imagem: profileImage, 
+      };
+  
+      storage("USUARIO", usuarioAtualizado);
+  
+      setNome(usuarioAtualizado.nome);
+      setTelefone(usuarioAtualizado.telefone);
+      setEmail(usuarioAtualizado.email);
+      setProfileImage(usuarioAtualizado.imagem);
+  
+      toast.success("Perfil atualizado com sucesso!");
     } catch (error) {
-        console.error("Erro ao alterar perfil:", error);
-
-        if (error.response && error.response.data.erro) {
-            toast.error(error.response.data.erro);  
-        } else {
-            toast.error("Erro ao alterar perfil.");
-        }
+      console.error("Erro ao alterar perfil:", error);
+  
+      if (error.response && error.response.data.erro) {
+        toast.error(error.response.data.erro);
+      } else {
+        toast.error("Erro ao alterar perfil.");
+      }
     }
-}
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -128,25 +132,33 @@ useEffect(() => {
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      const imageUrl = URL.createObjectURL(file);
-      setPreviewImage(imageUrl); 
-
+      const imageUrl = URL.createObjectURL(file); 
+      setPreviewImage(imageUrl);
+  
       const formData = new FormData();
-      formData.append('imagem', file); 
-
-      axios.post('http://localhost:3002/upload', formData)
+      formData.append('img', file);
+      formData.append('id', id);
+  
+      axios.post('http://localhost:3002/multer', formData)
         .then((response) => {
-          const imagePath = response.data.caminho; 
+          const { fl, og } = response.data; 
+          const imagePath = `http://localhost:3002/img/${fl}`; 
+  
           setProfileImage(imagePath);
+  
+          const User = storage('USUARIO');
+          const updatedUser = { ...User, imagem: imagePath }; 
+          storage('USUARIO', updatedUser); 
+  
+          toast.success("Imagem de perfil atualizada com sucesso!");
         })
         .catch((error) => {
           console.error('Erro ao enviar a imagem:', error);
           toast.error('Erro ao atualizar a imagem de perfil.');
         });
     }
-}
-
-
+  };
+  
   const handleSubmit = (e) => {
     e.preventDefault()
     AlterarPerfil()
@@ -194,7 +206,6 @@ useEffect(() => {
     )
   }
 
-
   return (
     <div className="secao-perfil">
       <MenuLateral />
@@ -240,7 +251,7 @@ useEffect(() => {
             <form onSubmit={handleSubmit}>
               <div className="campo-form">
                 <label htmlFor="nome" >Nome</label>
-                <input style={{textTransform: "capitalize"}} type="text" id="nome" name="nome" value={nome} onChange={handleInputChange} required />
+                <input style={{ textTransform: "capitalize" }} type="text" id="nome" name="nome" value={nome} onChange={handleInputChange} required />
               </div>
 
               <div className="campo-form">
@@ -254,6 +265,7 @@ useEffect(() => {
                     handleInputChange(e);
                     setTelefone(formatarTelefone(e.target.value));
                   }}
+                  maxLength={15}
                   required
                 />
               </div>

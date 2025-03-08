@@ -10,6 +10,7 @@ export default function Agendamento() {
     const [horario, setHorario] = useState('');
     const [data, setData] = useState('');
     const [nomeServico, setNomeServico] = useState('');
+    const id = localStorage.getItem('id');
 
     useEffect(() => {
         const servico = localStorage.getItem('servicoEscolhido');
@@ -33,7 +34,8 @@ export default function Agendamento() {
             let obj = {
                 nome: nomeServico,
                 horario,
-                data: dataFormatada
+                data: dataFormatada, 
+                id: id
             }
             let resp = await axios.post(url, obj);
 

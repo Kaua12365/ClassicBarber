@@ -7,62 +7,93 @@ import toast from "react-hot-toast";
 
 export default function Cabecalho() {
   const [id, setId] = useState();
-  const [menuSelecionado, setMenuSelecionado] = useState("home")
+  const [menuSelecionado, setMenuSelecionado] = useState("home");
   const [nome, setNome] = useState("");
-  const location = useLocation()
-
+  const [profileImage, setProfileImage] = useState("/assets/images/davi.svg");
+  const [previewImage, setPreviewImage] = useState(null);
+  const location = useLocation();
 
   function clearLocalStorage() {
     localStorage.clear();
-}
-    
+  }
+
   useEffect(() => {
-    const User = storage("USUARIO")
-    const path = location.pathname
-    setId(User.id)
+    const User = storage("USUARIO");
+    const path = location.pathname;
+    setId(User.id);
+    setProfileImage(User.imagem || "/assets/images/davi.svg");
+
     async function buscarDadosUsuario() {
       try {
-        const url = `http://localhost:3002/usuario/?id=${id}`
-        const response = await axios.get(url)
+        const url = `http://localhost:3002/usuario/?id=${id}`;
+        const response = await axios.get(url);
 
         if (response.data) {
-          setNome(User.nome || "")
-
+          setNome(User.nome || "");
         }
       } catch (error) {
-        console.error("Erro ao buscar dados do usuário:", error)
-        toast.error("Não foi possível carregar seus dados. Tente novamente mais tarde.")
+        console.error("Erro ao buscar dados do usuário:", error);
+        toast.error("Não foi possível carregar seus dados. Tente novamente mais tarde.");
       }
     }
 
-    buscarDadosUsuario()
-
+    buscarDadosUsuario();
 
     if (path.includes("/home")) {
-      setMenuSelecionado("home")
+      setMenuSelecionado("home");
     } else if (path.includes("/servicos")) {
-      setMenuSelecionado("servicos")
+      setMenuSelecionado("servicos");
     } else if (path.includes("/agendamento")) {
-      setMenuSelecionado("agendamento")
+      setMenuSelecionado("agendamento");
     } else if (path.includes("/perfil")) {
-      setMenuSelecionado("perfil")
+      setMenuSelecionado("perfil");
     }
-  }, [location])
+  }, [location]);
 
   function selecionarMenu(menu) {
-    setMenuSelecionado(menu)
+    setMenuSelecionado(menu);
   }
 
   function verificarMenuSelecionado(menu) {
-    if (menu === menuSelecionado) return "selecionado"
-    else return ""
+    if (menu === menuSelecionado) return "selecionado";
+    else return "";
   }
+
+  const handleImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      setPreviewImage(imageUrl);
+
+      const formData = new FormData();
+      formData.append('img', file);
+      formData.append('id', id);
+
+      axios.post('http://localhost:3002/multer', formData)
+        .then((response) => {
+          const { fl, og } = response.data;
+          const imagePath = `http://localhost:3002/img/${fl}`;
+
+          setProfileImage(imagePath);
+
+          const User = storage('USUARIO');
+          const updatedUser = { ...User, imagem: imagePath };
+          storage('USUARIO', updatedUser);
+
+          toast.success("Imagem de perfil atualizada com sucesso!");
+        })
+        .catch((error) => {
+          console.error('Erro ao enviar a imagem:', error);
+          toast.error('Erro ao atualizar a imagem de perfil.');
+        });
+    }
+  };
 
   return (
     <nav className="side-menu">
       <div className="profile-user">
-        <img src="/assets/images/davi.svg" alt="" />
-        <h1 style={{textTransform: "capitalize"}} >{nome}</h1>
+        <img src={previewImage || profileImage} alt="Foto de perfil" className="foto-usuario" />
+        <h1 style={{ textTransform: "capitalize" }} >{nome}</h1>
       </div>
       <div className="pages">
         <Link to="/home">

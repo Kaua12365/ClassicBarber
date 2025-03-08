@@ -8,6 +8,9 @@ const PORT = process.env.PORT;
 
 server.use(express.json());
 server.use(cors());
+
+server.use(express.static('public'));
+
 Rotas(server);
 
-server.listen(PORT, () => console.log(`API! ${PORT}`));
+server.listen(PORT, () => console.log(`API rodando na porta ${PORT}`));

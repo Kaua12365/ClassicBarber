@@ -20,9 +20,10 @@ endpoints.post("/agendar", async (req, resp) => {
     }
 });
 
-endpoints.get("/agendar", async (req, resp) => {
+endpoints.get("/agendar/:id", async (req, resp) => { 
     try {
-        let agendamentos = await QuantidadeAgendamento();
+        let id = req.params.id; 
+        let agendamentos = await QuantidadeAgendamento(id);
 
         resp.send({
             total_agendamentos: agendamentos[0].total_agendamentos 
@@ -34,5 +35,6 @@ endpoints.get("/agendar", async (req, resp) => {
         });
     }
 });
+
 
 export default endpoints;

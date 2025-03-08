@@ -23,7 +23,7 @@ export async function UsuarioGet() {
 export async function UsuarioDelete(user) {
     const comando = `
     DELETE from tb_usuarios
-    where id = ?;
+    where id_usuario = ?;
     `;
 
     let resp = await con.query(comando, [user.id]);
@@ -34,7 +34,7 @@ export async function UsuarioDelete(user) {
 
 export async function Login(user) {
     const comando = `
-    select id, nome, telefone, email, senha
+    select id_usuario, nome, telefone, email, senha
     from tb_usuarios
     where email = ? and
     senha = ?;
@@ -56,7 +56,7 @@ export async function UsuarioPUT(user, id) {
         ]
         .filter(Boolean)
         .join(', ')
-    } WHERE id = ?`;
+    } WHERE id_usuario = ?`;
 
     const valores = [
         user.nome, user.telefone, user.email, user.senha
@@ -66,4 +66,21 @@ export async function UsuarioPUT(user, id) {
 
     const resp = await con.query(comando, valores);
     return resp[0].affectedRows;
+}
+
+export async function UsuarioIMG(usuarioData, id) {
+    try {
+        const query = `
+            UPDATE tb_usuarios 
+            SET img = ? 
+            WHERE id_usuario = ?;
+        `;
+        
+        const [result] = await con.execute(query, [usuarioData.img, id]);
+
+        return result.affectedRows;  
+    } catch (err) {
+        console.error(err);
+        throw new Error('Erro ao atualizar usuário');
+    }
 }

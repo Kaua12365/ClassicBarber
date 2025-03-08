@@ -12,7 +12,9 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:3002/agendar')
+    const id = localStorage.getItem('id');
+
+    axios.get(`http://localhost:3002/agendar/${id}`)
       .then(resp => {
         setTotalAgendamentos(resp.data.total_agendamentos); 
         setLoading(false);
@@ -21,7 +23,9 @@ function Dashboard() {
         console.error('Erro ao carregar agendamentos:', error);
         setLoading(false);
       });
-  }, []);
+}, []);
+
+
 
   const total = 100;
   const livre = total - totalAgendamentos;
@@ -49,7 +53,7 @@ function Dashboard() {
       },
       tooltip: {
         callbacks: {
-          label: function(tooltipItem) {
+          label: function (tooltipItem) {
             const label = tooltipItem.label || '';
             const value = tooltipItem.raw;
             const percentage = ((value / total) * 100).toFixed(2);
