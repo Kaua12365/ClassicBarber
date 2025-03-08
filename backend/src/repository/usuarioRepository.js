@@ -47,40 +47,34 @@ export async function Login(user) {
 }
 
 export async function UsuarioPUT(user, id) {
-    const comando = `UPDATE tb_usuarios SET ${
-        [
+    const comando = `UPDATE tb_usuarios SET ${[
             user.nome && 'nome = ?',
             user.telefone && 'telefone = ?',
             user.email && 'email = ?',
             user.senha && 'senha = ?'
         ]
-        .filter(Boolean)
-        .join(', ')
-    } WHERE id_usuario = ?`;
+            .filter(Boolean)
+            .join(', ')
+        } WHERE id_usuario = ?`;
 
     const valores = [
         user.nome, user.telefone, user.email, user.senha
     ].filter(Boolean);
 
-    valores.push(id); 
+    valores.push(id);
 
     const resp = await con.query(comando, valores);
     return resp[0].affectedRows;
 }
 
 export async function UsuarioIMG(usuarioData, id) {
-    try {
-        const query = `
+    const query = `
             UPDATE tb_usuarios 
             SET img = ? 
             WHERE id_usuario = ?;
         `;
-        
-        const [result] = await con.execute(query, [usuarioData.img, id]);
 
-        return result.affectedRows;  
-    } catch (err) {
-        console.error(err);
-        throw new Error('Erro ao atualizar usuário');
-    }
+    const [result] = await con.execute(query, [usuarioData.img, id]);
+
+    return result.affectedRows;
 }
